@@ -342,3 +342,4 @@ $categories_grid = [
 
 <?php
 get_footer();
+

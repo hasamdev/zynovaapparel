@@ -174,3 +174,4 @@ function zynova_breadcrumbs() {
 
     echo '</div></nav>';
 }
+

@@ -121,3 +121,4 @@ function zynova_ajax_quote_handler() {
 }
 add_action('wp_ajax_za_submit_quote_inquiry', 'zynova_ajax_quote_handler');
 add_action('wp_ajax_nopriv_za_submit_quote_inquiry', 'zynova_ajax_quote_handler');
+
