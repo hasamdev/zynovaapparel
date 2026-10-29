@@ -156,12 +156,10 @@ $categories_grid = [
                 <div class="za-heading-bar"></div>
             </div>
 
-            <div class="za-category-grid za-category-direct-grid">
+            <div class="za-category-grid">
                 <?php foreach ($categories_grid as $cat) : ?>
-                    <a href="<?php echo esc_url($cat['url']); ?>" class="za-cat-card za-cat-direct-card" aria-label="<?php echo esc_attr($cat['title']); ?>">
-                        <div class="za-cat-image-wrap">
-                            <img src="<?php echo esc_url($cat['image']); ?>" alt="<?php echo esc_attr($cat['title']); ?>" loading="lazy">
-                        </div>
+                    <a href="<?php echo esc_url($cat['url']); ?>" class="za-cat-card" aria-label="<?php echo esc_attr($cat['title']); ?>">
+                        <img src="<?php echo esc_url($cat['image']); ?>" alt="<?php echo esc_attr($cat['title']); ?>" class="za-cat-img" loading="lazy">
                     </a>
                 <?php endforeach; ?>
             </div>
