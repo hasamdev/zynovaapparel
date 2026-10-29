@@ -580,7 +580,7 @@
 }
 
 /* ==========================================================================
-   3. HERO SLIDER SECTION (Matches Home Page Design.jpg)
+   3. HERO SLIDER SECTION (Direct Graphic Banners)
    ========================================================================== */
 .za-hero-section {
   position: relative;
@@ -590,9 +590,11 @@
 
 .za-hero-slider-wrap {
   position: relative;
-  height: 82vh;
-  min-height: 580px;
-  max-height: 780px;
+  width: 100%;
+  aspect-ratio: 1600 / 685;
+  min-height: 380px;
+  max-height: 720px;
+  background-color: var(--za-primary-dark);
 }
 
 .za-hero-slider {
@@ -607,13 +609,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.8s ease-in-out, visibility 0.8s;
-  display: flex;
-  align-items: center;
+  transition: opacity 0.6s ease-in-out, visibility 0.6s;
 }
 
 .za-slide.is-active {
@@ -621,66 +619,20 @@
   visibility: visible;
 }
 
-.za-slide-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+.za-slide-direct-link {
+  display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(11, 22, 30, 0.94) 0%,
-    rgba(11, 22, 30, 0.8) 45%,
-    rgba(11, 22, 30, 0.35) 100%
-  );
-}
-
-.za-slide-container {
+  cursor: pointer;
   position: relative;
-  z-index: 2;
 }
 
-.za-hero-content {
-  max-width: 620px;
-  color: var(--za-white);
-}
-
-.za-hero-gold-badge {
-  margin-bottom: 20px;
-}
-
-.za-gold-za {
-  font-family: var(--za-font-heading);
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: var(--za-accent-gold);
-  letter-spacing: 0.06em;
-  line-height: 1;
-  display: inline-block;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.za-hero-title {
-  font-size: 3.25rem;
-  font-weight: 900;
-  color: var(--za-white);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-
-.za-hero-subtitle {
-  font-size: 1.15rem;
-  color: #e2e8f0;
-  margin-bottom: 36px;
-  line-height: 1.6;
-}
-
-.za-hero-buttons {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+.za-slide-direct-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 /* Slider Controls */
@@ -688,16 +640,61 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: rgba(11, 22, 30, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(11, 22, 30, 0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
   color: var(--za-white);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 10;
+  transition: all var(--za-transition-fast);
+  backdrop-filter: blur(4px);
+}
+
+.za-slider-arrow:hover {
+  background: var(--za-accent-cyan);
+  color: var(--za-primary-dark);
+  border-color: var(--za-accent-cyan);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.za-slider-arrow.za-prev { left: 24px; }
+.za-slider-arrow.za-next { right: 24px; }
+
+.za-slider-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+  padding: 8px 16px;
+  background: rgba(11, 22, 30, 0.45);
+  border-radius: var(--za-radius-full);
+  backdrop-filter: blur(4px);
+}
+
+.za-slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all var(--za-transition-fast);
+  padding: 0;
+}
+
+.za-slider-dot.is-active {
+  background: var(--za-accent-gold);
+  transform: scale(1.35);
+  box-shadow: 0 0 10px rgba(200, 155, 60, 0.8);
+}
   z-index: 5;
   transition: all var(--za-transition-fast);
 }
@@ -768,16 +765,17 @@
 }
 
 /* ==========================================================================
-   4. SHOP BY CATEGORY SECTION (Matches Home Page Design.jpg)
+   4. SHOP BY CATEGORY SECTION (Direct Artwork Cards)
    ========================================================================== */
 .za-categories-section {
   background-color: #fafbfc;
+  padding: 85px 0;
 }
 
 .za-category-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 28px;
 }
 
 .za-cat-card {
@@ -787,22 +785,23 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: all var(--za-transition-normal);
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: block;
+  border: 1.5px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
 }
 
 .za-cat-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.16);
+  transform: translateY(-8px);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.2);
   border-color: var(--za-accent-gold);
 }
 
 .za-cat-image-wrap {
   position: relative;
   width: 100%;
-  padding-top: 85%; /* 4:3.4 ratio */
+  padding-top: 133.33%; /* 3:4 portrait ratio matching the provided category posters */
   overflow: hidden;
+  background-color: var(--za-primary-surface);
 }
 
 .za-cat-image-wrap img {
@@ -812,61 +811,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
 }
 
 .za-cat-card:hover .za-cat-image-wrap img {
-  transform: scale(1.08);
-}
-
-.za-cat-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60%;
-  background: linear-gradient(to top, rgba(11, 22, 30, 0.95), transparent);
-}
-
-.za-cat-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 24px;
-  color: var(--za-white);
-  z-index: 2;
-}
-
-.za-cat-title {
-  font-family: var(--za-font-heading);
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--za-white);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-  letter-spacing: 0.03em;
-}
-
-.za-cat-subtitle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.88rem;
-  color: #cbd5e1;
-  transition: color var(--za-transition-fast);
-}
-
-.za-cat-card:hover .za-cat-subtitle {
-  color: var(--za-accent-cyan);
-}
-
-.za-cat-subtitle svg {
-  transition: transform var(--za-transition-fast);
-}
-
-.za-cat-card:hover .za-cat-subtitle svg {
-  transform: translateX(4px);
+  transform: scale(1.05);
 }
 
 /* ==========================================================================

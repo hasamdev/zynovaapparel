@@ -1,7 +1,10 @@
 <?php
 /**
  * Front Page Template for Zynova Apparel Theme
- * Aligned strictly with "Home Page Design.jpg"
+ * Strictly aligned with Design Assets:
+ * - Direct Slider images with embedded graphics linked directly to relative categories
+ * - Direct Category images with embedded artwork linked directly to relative categories
+ * - No duplicate HTML text/subtext/buttons overlaid on top of graphic banners
  *
  * @package Zynova_Apparel
  */
@@ -12,135 +15,113 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
-// Fetch live category images from uploads or fallback to uploaded paths
+$theme_uri = get_template_directory_uri();
+
+// Helper to get category link
+$get_cat_url = function($slug) {
+    $term = get_term_by('slug', $slug, 'product_cat');
+    if ($term && !is_wp_error($term)) {
+        return get_term_link($term);
+    }
+    return home_url('/product-category/' . sanitize_title($slug) . '/');
+};
+
+// Direct Slider banners mapping to relative category/page links
 $slider_slides = [
     [
-        'title'    => 'GEAR UP. STAND OUT. PERFORM.',
-        'subtitle' => 'Premium apparel, workwear, and accessories crafted for Motorsport, Fashion, Sport & Work.',
-        'image'    => home_url('/wp-content/uploads/2026/10/Motorcycle-Racing-Gear.jpeg'),
-        'cat_url'  => home_url('/product-category/motorcycle-racing-gear/'),
-        'tag'      => 'MOTORSPORT & RACING',
+        'title' => 'Motorcycle & Racing Gear',
+        'url'   => $get_cat_url('motorcycle-racing-gear'),
+        'image' => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear.jpg',
     ],
     [
-        'title'    => 'BUILT FOR EVERY RIDE',
-        'subtitle' => 'Premium motorcycle gear designed for safety, performance, and uncompromising style.',
-        'image'    => home_url('/wp-content/uploads/2026/10/2-Sportswear.jpeg'),
-        'cat_url'  => home_url('/product-category/sportswear/'),
-        'tag'      => 'PRO SPORTSWEAR',
+        'title' => 'Sportswear',
+        'url'   => $get_cat_url('sportswear'),
+        'image' => $theme_uri . '/assets/images/sliders/sportswear.jpg',
     ],
     [
-        'title'    => 'URBAN COMFORT & TIMELESS STYLE',
-        'subtitle' => 'Engineered fashion apparel and premium jackets tailored for modern living.',
-        'image'    => home_url('/wp-content/uploads/2026/10/3-Fashion-Wear.jpg'),
-        'cat_url'  => home_url('/product-category/fashion-wear/'),
-        'tag'      => 'FASHION & LEATHER',
+        'title' => 'Fashion Wear',
+        'url'   => $get_cat_url('fashion-wear'),
+        'image' => $theme_uri . '/assets/images/sliders/fashion-wear.jpg',
     ],
     [
-        'title'    => 'MAXIMUM PROTECTION ON DUTY',
-        'subtitle' => 'Certified high-visibility workwear and PPE equipment engineered for extreme conditions.',
-        'image'    => home_url('/wp-content/uploads/2026/10/4-Workwear-Safety.jpeg'),
-        'cat_url'  => home_url('/product-category/workwear-safety-gear/'),
-        'tag'      => 'WORKWEAR & SAFETY',
+        'title' => 'Workwear & Safety Gear',
+        'url'   => $get_cat_url('workwear-safety-gear'),
+        'image' => $theme_uri . '/assets/images/sliders/workwear-safety.jpg',
     ],
     [
-        'title'    => 'DURABILITY FOR EVERY JOURNEY',
-        'subtitle' => 'Handcrafted genuine leather travel duffels and gear bags designed to endure.',
-        'image'    => home_url('/wp-content/uploads/2026/10/5-Bags.jpeg'),
-        'cat_url'  => home_url('/product-category/bags/'),
-        'tag'      => 'TRAVEL & RACING BAGS',
+        'title' => 'Bags & Travel Gear',
+        'url'   => $get_cat_url('bags'),
+        'image' => $theme_uri . '/assets/images/sliders/bags.jpg',
     ],
     [
-        'title'    => 'PRECISION ESSENTIALS & ACCESSORIES',
-        'subtitle' => 'Finest leather belts, wallets, caps, and protective sleeves crafted with care.',
-        'image'    => home_url('/wp-content/uploads/2026/10/6-Accessories.jpg'),
-        'cat_url'  => home_url('/product-category/accessories/'),
-        'tag'      => 'PREMIUM ACCESSORIES',
+        'title' => 'Accessories',
+        'url'   => $get_cat_url('accessories'),
+        'image' => $theme_uri . '/assets/images/sliders/accessories.jpg',
     ],
 ];
 
+// Direct Home Main Category Cards mapping to relative category/page links
 $categories_grid = [
     [
-        'name'     => 'MOTORCYCLE & RACING',
-        'subtitle' => 'Racing jackets, gloves & gear',
-        'url'      => home_url('/product-category/motorcycle-racing-gear/'),
-        'image'    => home_url('/wp-content/uploads/2026/10/Motorcycle-Racing-Gear.jpeg'),
+        'title' => 'Motorcycle & Racing Gear',
+        'url'   => $get_cat_url('motorcycle-racing-gear'),
+        'image' => $theme_uri . '/assets/images/categories/motorcycle-racing-gear.jpg',
     ],
     [
-        'name'     => 'SPORTSWEAR',
-        'subtitle' => 'Performancewear & sport gear',
-        'url'      => home_url('/product-category/sportswear/'),
-        'image'    => home_url('/wp-content/uploads/2026/10/2-Sportswear.jpeg'),
+        'title' => 'Sportswear',
+        'url'   => $get_cat_url('sportswear'),
+        'image' => $theme_uri . '/assets/images/categories/sportswear.jpg',
     ],
     [
-        'name'     => 'FASHION WEAR',
-        'subtitle' => 'Streetwear, apparel & essentials',
-        'url'      => home_url('/product-category/fashion-wear/'),
-        'image'    => home_url('/wp-content/uploads/2026/10/3-Fashion-Wear.jpg'),
+        'title' => 'Fashion Wear',
+        'url'   => $get_cat_url('fashion-wear'),
+        'image' => $theme_uri . '/assets/images/categories/fashion-wear.jpg',
     ],
     [
-        'name'     => 'WORKWEAR AND SAFETY',
-        'subtitle' => 'Durable workwear & protective gear',
-        'url'      => home_url('/product-category/workwear-safety-gear/'),
-        'image'    => home_url('/wp-content/uploads/2026/10/4-Workwear-Safety.jpeg'),
+        'title' => 'Workwear & Safety Gear',
+        'url'   => $get_cat_url('workwear-safety-gear'),
+        'image' => $theme_uri . '/assets/images/categories/workwear-safety.jpg',
     ],
     [
-        'name'     => 'BAGS',
-        'subtitle' => 'Duffels, backpacks & travel bags',
-        'url'      => home_url('/product-category/bags/'),
-        'image'    => home_url('/wp-content/uploads/2026/10/5-Bags.jpeg'),
+        'title' => 'Bags',
+        'url'   => $get_cat_url('bags'),
+        'image' => $theme_uri . '/assets/images/categories/bags.jpg',
     ],
     [
-        'name'     => 'ACCESSORIES',
-        'subtitle' => 'Caps, belts, wallets & more',
-        'url'      => home_url('/product-category/accessories/'),
-        'image'    => home_url('/wp-content/uploads/2026/10/6-Accessories.jpg'),
+        'title' => 'Accessories',
+        'url'   => $get_cat_url('accessories'),
+        'image' => $theme_uri . '/assets/images/categories/accessories.jpg',
     ],
 ];
 ?>
 
 <main id="primary" class="site-main za-home-page">
 
-    <!-- HERO SLIDER SECTION -->
-    <section class="za-hero-section" aria-label="Featured Collections Slider">
+    <!-- HERO SLIDER SECTION (Clean banner images directly linking to relative categories) -->
+    <section class="za-hero-section za-hero-direct-banners" aria-label="Featured Collections Slider">
         <div class="za-hero-slider-wrap">
             <div class="za-hero-slider" id="za-hero-slider">
                 <?php foreach ($slider_slides as $index => $slide) : ?>
-                    <div class="za-slide <?php echo $index === 0 ? 'is-active' : ''; ?>" style="background-image: url('<?php echo esc_url($slide['image']); ?>');">
-                        <div class="za-slide-overlay"></div>
-                        <div class="za-container za-slide-container">
-                            <div class="za-hero-content">
-                                <div class="za-hero-gold-badge">
-                                    <span class="za-gold-za">ZA</span>
-                                </div>
-                                <h1 class="za-hero-title"><?php echo esc_html($slide['title']); ?></h1>
-                                <p class="za-hero-subtitle"><?php echo esc_html($slide['subtitle']); ?></p>
-                                
-                                <div class="za-hero-buttons">
-                                    <a href="<?php echo esc_url($slide['cat_url']); ?>" class="za-btn za-btn-gold">
-                                        <span>SHOP NOW</span>
-                                    </a>
-                                    <a href="#categories-section" class="za-btn za-btn-outline-light">
-                                        <span>EXPLORE COLLECTIONS</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="za-slide <?php echo $index === 0 ? 'is-active' : ''; ?>">
+                        <a href="<?php echo esc_url($slide['url']); ?>" class="za-slide-direct-link" aria-label="<?php echo esc_attr($slide['title']); ?>">
+                            <img src="<?php echo esc_url($slide['image']); ?>" alt="<?php echo esc_attr($slide['title']); ?>" class="za-slide-direct-img" <?php echo $index === 0 ? 'loading="eager"' : 'loading="lazy"'; ?>>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
 
-            <!-- Slider Controls -->
+            <!-- Slider Navigation Controls -->
             <button class="za-slider-arrow za-prev" id="za-slide-prev" aria-label="Previous Slide">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </button>
             <button class="za-slider-arrow za-next" id="za-slide-next" aria-label="Next Slide">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
 
             <!-- Slider Dots -->
             <div class="za-slider-dots" id="za-slider-dots" role="tablist">
                 <?php foreach ($slider_slides as $i => $s) : ?>
-                    <button class="za-slider-dot <?php echo $i === 0 ? 'is-active' : ''; ?>" data-slide="<?php echo esc_attr($i); ?>" role="tab" aria-label="Slide <?php echo esc_attr($i + 1); ?>"></button>
+                    <button class="za-slider-dot <?php echo $i === 0 ? 'is-active' : ''; ?>" data-slide="<?php echo esc_attr($i); ?>" role="tab" aria-label="Slide <?php echo esc_attr($i + 1); ?>: <?php echo esc_attr($s['title']); ?>"></button>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -150,7 +131,7 @@ $categories_grid = [
             <div class="za-container">
                 <div class="za-trust-grid">
                     <div class="za-trust-item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
                         <span>FREE SHIPPING ON ORDERS $100+</span>
                     </div>
                     <div class="za-trust-item">
@@ -166,7 +147,7 @@ $categories_grid = [
         </div>
     </section>
 
-    <!-- SHOP BY CATEGORY SECTION -->
+    <!-- SHOP BY CATEGORY SECTION (Direct category images directly linking to relative categories) -->
     <section id="categories-section" class="za-section za-categories-section">
         <div class="za-container">
             <div class="za-section-header">
@@ -175,19 +156,11 @@ $categories_grid = [
                 <div class="za-heading-bar"></div>
             </div>
 
-            <div class="za-category-grid">
+            <div class="za-category-grid za-category-direct-grid">
                 <?php foreach ($categories_grid as $cat) : ?>
-                    <a href="<?php echo esc_url($cat['url']); ?>" class="za-cat-card">
+                    <a href="<?php echo esc_url($cat['url']); ?>" class="za-cat-card za-cat-direct-card" aria-label="<?php echo esc_attr($cat['title']); ?>">
                         <div class="za-cat-image-wrap">
-                            <img src="<?php echo esc_url($cat['image']); ?>" alt="<?php echo esc_attr($cat['name']); ?>" loading="lazy">
-                            <div class="za-cat-overlay"></div>
-                        </div>
-                        <div class="za-cat-info">
-                            <h3 class="za-cat-title"><?php echo esc_html($cat['name']); ?></h3>
-                            <div class="za-cat-subtitle">
-                                <span><?php echo esc_html($cat['subtitle']); ?></span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </div>
+                            <img src="<?php echo esc_url($cat['image']); ?>" alt="<?php echo esc_attr($cat['title']); ?>" loading="lazy">
                         </div>
                     </a>
                 <?php endforeach; ?>
@@ -214,7 +187,7 @@ $categories_grid = [
 
                 <div class="za-why-card">
                     <div class="za-why-icon-wrap">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
                     </div>
                     <h3 class="za-why-item-title">FAST DELIVERY</h3>
                     <p class="za-why-item-desc">Quick and reliable shipping across the country, delivered to your door.</p>
@@ -284,13 +257,13 @@ $categories_grid = [
                         }
                         wp_reset_postdata();
                     } else {
-                        // Fallback showcase cards matching Home Page Design.jpg
+                        // Fallback showcase items matching product lines
                         $showcase = [
-                            ['title' => 'RACING JACKET PRO', 'img' => home_url('/wp-content/uploads/2026/10/Motorcycle-Racing-Gear.jpeg'), 'cat' => 'Motorcycle Gear'],
-                            ['title' => 'PERFORMANCE HOODIE', 'img' => home_url('/wp-content/uploads/2026/10/Fashion-Hoodies-14.jpeg'), 'cat' => 'Sportswear'],
-                            ['title' => 'TRAIL RUNNING SHOES', 'img' => home_url('/wp-content/uploads/2026/10/2-Sportswear.jpeg'), 'cat' => 'Footwear'],
-                            ['title' => 'SAFETY HELMET PRO', 'img' => home_url('/wp-content/uploads/2026/10/4-Workwear-Safety.jpeg'), 'cat' => 'Workwear & Safety'],
-                            ['title' => 'LEATHER DUFFEL BAG', 'img' => home_url('/wp-content/uploads/2026/10/5-Bags.jpeg'), 'cat' => 'Bags & Travel'],
+                            ['title' => 'RACING JACKET PRO', 'img' => $theme_uri . '/assets/images/categories/motorcycle-racing-gear.jpg', 'cat' => 'Motorcycle Gear', 'url' => $get_cat_url('motorcycle-racing-gear')],
+                            ['title' => 'PERFORMANCE HOODIE', 'img' => $theme_uri . '/assets/images/categories/sportswear.jpg', 'cat' => 'Sportswear', 'url' => $get_cat_url('sportswear')],
+                            ['title' => 'URBAN LEATHER JACKET', 'img' => $theme_uri . '/assets/images/categories/fashion-wear.jpg', 'cat' => 'Fashion Wear', 'url' => $get_cat_url('fashion-wear')],
+                            ['title' => 'SAFETY COVERALL PRO', 'img' => $theme_uri . '/assets/images/categories/workwear-safety.jpg', 'cat' => 'Workwear & Safety', 'url' => $get_cat_url('workwear-safety-gear')],
+                            ['title' => 'LEATHER DUFFEL BAG', 'img' => $theme_uri . '/assets/images/categories/bags.jpg', 'cat' => 'Bags & Travel', 'url' => $get_cat_url('bags')],
                         ];
 
                         foreach ($showcase as $item) {
@@ -298,12 +271,14 @@ $categories_grid = [
                             <div class="za-product-card">
                                 <div class="za-product-badge"><?php echo esc_html($item['title']); ?></div>
                                 <div class="za-product-img-wrap">
-                                    <img src="<?php echo esc_url($item['img']); ?>" alt="<?php echo esc_attr($item['title']); ?>" loading="lazy">
+                                    <a href="<?php echo esc_url($item['url']); ?>">
+                                        <img src="<?php echo esc_url($item['img']); ?>" alt="<?php echo esc_attr($item['title']); ?>" loading="lazy">
+                                    </a>
                                 </div>
                                 <div class="za-product-info">
                                     <span class="za-product-cat-tag"><?php echo esc_html($item['cat']); ?></span>
                                     <h3 class="za-product-name"><?php echo esc_html($item['title']); ?></h3>
-                                    <button type="button" class="za-btn za-btn-sm za-btn-primary za-open-quote-modal">Request Quote</button>
+                                    <button type="button" class="za-btn za-btn-sm za-btn-primary za-open-quote-modal" data-category="<?php echo esc_attr($item['cat']); ?>">Request Quote</button>
                                 </div>
                             </div>
                             <?php
@@ -342,4 +317,3 @@ $categories_grid = [
 
 <?php
 get_footer();
-
