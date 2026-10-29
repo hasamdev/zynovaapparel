@@ -42,7 +42,7 @@
 .za-heading-bar {
   width: 50px;
   height: 3px;
-  background-color: var(--za-accent-cyan);
+  background-color: var(--za-accent-gold);
   margin: 0 auto;
   border-radius: var(--za-radius-full);
 }
@@ -72,8 +72,8 @@
 }
 
 .za-btn-primary:hover {
-  background-color: var(--za-accent-cyan);
-  border-color: var(--za-accent-cyan);
+  background-color: var(--za-accent-gold);
+  border-color: var(--za-accent-gold);
   color: var(--za-primary-dark);
 }
 
@@ -108,7 +108,7 @@
 .za-btn-quote {
   background: transparent;
   color: var(--za-white);
-  border: 1.5px solid var(--za-accent-cyan);
+  border: 1.5px solid var(--za-accent-gold);
   border-radius: var(--za-radius-sm);
   padding: 9px 20px;
   font-size: 0.88rem;
@@ -116,10 +116,10 @@
 }
 
 .za-btn-quote:hover {
-  background-color: var(--za-accent-cyan);
+  background-color: var(--za-accent-gold);
   color: var(--za-primary-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(0, 194, 203, 0.35);
+  box-shadow: 0 4px 18px rgba(200, 155, 60, 0.35);
 }
 
 .za-btn-sm {
@@ -268,7 +268,7 @@ body.admin-bar .za-site-header {
 
 .za-nav-item:hover > .za-nav-link,
 .za-nav-item.is-active > .za-nav-link {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-nav-item:hover > .za-nav-link .za-chevron-down {
@@ -283,7 +283,7 @@ body.admin-bar .za-site-header {
   left: 14px;
   right: 14px;
   height: 3px;
-  background-color: var(--za-accent-cyan);
+  background-color: var(--za-accent-gold);
   border-radius: 3px 3px 0 0;
 }
 
@@ -304,7 +304,7 @@ body.admin-bar .za-site-header {
   transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
   padding: 32px 36px;
   z-index: 1001;
-  border-top: 3px solid var(--za-accent-cyan);
+  border-top: 3px solid var(--za-accent-gold);
 }
 
 .za-nav-item:hover > .za-mega-dropdown {
@@ -355,14 +355,14 @@ body.admin-bar .za-site-header {
 }
 
 .za-mega-col-heading:hover {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-mega-col-bar {
   display: block;
   width: 28px;
   height: 2px;
-  background-color: var(--za-accent-cyan);
+  background-color: var(--za-accent-gold);
   border-radius: 2px;
 }
 
@@ -385,7 +385,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-mega-links a:hover {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
   transform: translateX(3px);
 }
 
@@ -409,14 +409,14 @@ body.admin-bar .za-site-header {
 }
 
 .za-header-cart-btn:hover {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-cart-badge {
   position: absolute;
   top: 4px;
   right: 4px;
-  background-color: var(--za-accent-cyan);
+  background-color: var(--za-accent-gold);
   color: var(--za-primary-dark);
   font-size: 0.7rem;
   font-weight: 700;
@@ -549,7 +549,7 @@ body.admin-bar .za-site-header {
 
 .za-mobile-nav-item.is-expanded .za-mobile-toggle-btn {
   transform: rotate(180deg);
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-mobile-accordion-content {
@@ -565,7 +565,7 @@ body.admin-bar .za-site-header {
   display: block;
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
   text-transform: uppercase;
   margin: 14px 0 6px 0;
 }
@@ -667,9 +667,9 @@ body.admin-bar .za-site-header {
 }
 
 .za-slider-arrow:hover {
-  background: var(--za-accent-cyan);
+  background: var(--za-accent-gold);
   color: var(--za-primary-dark);
-  border-color: var(--za-accent-cyan);
+  border-color: var(--za-accent-gold);
   transform: translateY(-50%) scale(1.08);
 }
 
@@ -711,9 +711,9 @@ body.admin-bar .za-site-header {
 }
 
 .za-slider-arrow:hover {
-  background: var(--za-accent-cyan);
+  background: var(--za-accent-gold);
   color: var(--za-primary-dark);
-  border-color: var(--za-accent-cyan);
+  border-color: var(--za-accent-gold);
 }
 
 .za-slider-arrow.za-prev { left: 24px; }
@@ -771,7 +771,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-trust-item svg {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
   flex-shrink: 0;
 }
 
@@ -927,7 +927,7 @@ body.admin-bar .za-site-header {
 .za-product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.09);
-  border-color: var(--za-accent-cyan);
+  border-color: var(--za-accent-gold);
 }
 
 .za-product-badge {
@@ -1098,7 +1098,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-social-icon:hover {
-  background: var(--za-accent-cyan);
+  background: var(--za-accent-gold);
   color: var(--za-primary-dark);
   transform: translateY(-2px);
 }
@@ -1115,7 +1115,7 @@ body.admin-bar .za-site-header {
   display: block;
   width: 32px;
   height: 2px;
-  background-color: var(--za-accent-cyan);
+  background-color: var(--za-accent-gold);
   border-radius: 2px;
   margin-bottom: 22px;
 }
@@ -1141,7 +1141,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-footer-links a:hover {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
   transform: translateX(4px);
 }
 
@@ -1173,7 +1173,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-strip-item svg {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-strip-item a {
@@ -1181,7 +1181,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-strip-item a:hover {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-strip-divider {
@@ -1199,7 +1199,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-strip-values svg {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-dot {
@@ -1247,7 +1247,7 @@ body.admin-bar .za-site-header {
   overflow-y: auto;
   border-radius: var(--za-radius-lg);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-  border-top: 4px solid var(--za-accent-cyan);
+  border-top: 4px solid var(--za-accent-gold);
   padding: 36px;
   position: relative;
   transform: translateY(20px);
@@ -1349,8 +1349,8 @@ body.admin-bar .za-site-header {
 .za-form-group select:focus,
 .za-form-group textarea:focus {
   outline: none;
-  border-color: var(--za-accent-cyan);
-  box-shadow: 0 0 0 3px rgba(0, 194, 203, 0.15);
+  border-color: var(--za-accent-gold);
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.15);
   background-color: #ffffff;
 }
 
@@ -1409,7 +1409,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-breadcrumbs a:hover {
-  color: var(--za-accent-cyan);
+  color: var(--za-accent-gold);
 }
 
 .za-bc-sep {
@@ -1443,15 +1443,15 @@ body.admin-bar .za-site-header {
   border-radius: var(--za-radius-md);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
   margin-bottom: 20px;
-  border-left: 3px solid var(--za-accent-cyan);
+  border-left: 3px solid var(--za-accent-gold);
 }
 
 .za-contact-icon {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(0, 194, 203, 0.1);
-  color: var(--za-accent-cyan);
+  background: rgba(200, 155, 60, 0.1);
+  color: var(--za-accent-gold);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1522,7 +1522,7 @@ body.admin-bar .za-site-header {
 .za-woocommerce-content ul.products li.product:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
-  border-color: var(--za-accent-cyan);
+  border-color: var(--za-accent-gold);
 }
 
 .za-woocommerce-content ul.products li.product .woocommerce-loop-product__title {
@@ -1548,7 +1548,7 @@ body.admin-bar .za-site-header {
 }
 
 .za-woocommerce-content .button:hover {
-  background-color: var(--za-accent-cyan) !important;
+  background-color: var(--za-accent-gold) !important;
   color: var(--za-primary-dark) !important;
 }
 
