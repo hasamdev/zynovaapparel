@@ -1,0 +1,17 @@
+# Ignore design assets and uploaded folder
+Web/
+web/
+*.zip
+
+# OS & IDE
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs & temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,111 @@
+/*
+Theme Name: Zynova Apparel
+Theme URI: https://zynovaapparel.com/
+Author: Zynova Apparel Development Team
+Author URI: https://zynovaapparel.com/
+Description: Custom high-performance luxury WordPress & WooCommerce theme designed specifically for Zynova Apparel — premium performance gear, motorsport apparel, sportswear, fashion wear, workwear & safety, bags, and accessories. Features mega menus, full responsive layout, quote inquiry system, and high-conversion catalog UX.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 7.1.4
+Requires PHP: 7.4
+License: Proprietary
+Text Domain: zynova
+Tags: e-commerce, custom-menu, featured-images, full-width-template, theme-options, translation-ready
+*/
+
+:root {
+  /* Brand Core Palette */
+  --za-primary: #0b161e;
+  --za-primary-dark: #070e13;
+  --za-primary-light: #142430;
+  --za-primary-surface: #101c26;
+
+  /* Accent Colors */
+  --za-accent-cyan: #00c2cb;
+  --za-accent-cyan-hover: #00a4ad;
+  --za-accent-cyan-light: rgba(0, 194, 203, 0.12);
+  --za-accent-gold: #c89b3c;
+  --za-accent-gold-hover: #b38930;
+  --za-accent-gold-light: rgba(200, 155, 60, 0.15);
+
+  /* Neutrals */
+  --za-white: #ffffff;
+  --za-dark: #0f172a;
+  --za-gray-900: #111827;
+  --za-gray-800: #1f2937;
+  --za-gray-700: #374151;
+  --za-gray-600: #4b5563;
+  --za-gray-500: #6b7280;
+  --za-gray-400: #9ca3af;
+  --za-gray-300: #d1d5db;
+  --za-gray-200: #e5e7eb;
+  --za-gray-100: #f3f4f6;
+  --za-gray-50: #f9fafb;
+
+  /* Typography */
+  --za-font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --za-font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Container */
+  --za-max-w: 1360px;
+  --za-header-height: 84px;
+  --za-radius-sm: 6px;
+  --za-radius-md: 10px;
+  --za-radius-lg: 16px;
+  --za-radius-full: 9999px;
+
+  /* Transitions */
+  --za-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --za-transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--za-font-body);
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--za-gray-800);
+  background-color: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--za-transition-fast);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--za-font-heading);
+  margin-top: 0;
+  color: var(--za-gray-900);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
