@@ -172,6 +172,7 @@ $categories_grid = [
             <div class="za-why-header">
                 <h2 class="za-why-title">WHY CHOOSE ZA</h2>
                 <p class="za-why-subtitle">Built for quality. Trusted for performance. Designed for you.</p>
+                <div class="za-heading-bar"></div>
             </div>
 
             <div class="za-why-grid">
@@ -235,7 +236,6 @@ $categories_grid = [
                             global $product;
                             ?>
                             <div class="za-product-card">
-                                <div class="za-product-badge"><?php the_title(); ?></div>
                                 <div class="za-product-img-wrap">
                                     <a href="<?php the_permalink(); ?>">
                                         <?php if (has_post_thumbnail()) : ?>
@@ -267,7 +267,6 @@ $categories_grid = [
                         foreach ($showcase as $item) {
                             ?>
                             <div class="za-product-card">
-                                <div class="za-product-badge"><?php echo esc_html($item['title']); ?></div>
                                 <div class="za-product-img-wrap">
                                     <a href="<?php echo esc_url($item['url']); ?>">
                                         <img src="<?php echo esc_url($item['img']); ?>" alt="<?php echo esc_attr($item['title']); ?>" loading="lazy">
