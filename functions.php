@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.0.8');
+define('ZYNOVA_THEME_VERSION', '1.0.9');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -99,6 +99,100 @@ function zynova_scripts() {
         ['zynova-style'],
         ZYNOVA_THEME_VERSION
     );
+
+    // Injected critical CSS overrides to guarantee immediate cache-free rendering
+    $critical_css = "
+        .za-mega-dropdown ul, .za-mega-dropdown ol, .za-mega-dropdown li,
+        ul.za-mega-links, ul.za-mega-links li {
+            list-style: none !important;
+            list-style-type: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .za-mega-inner {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: stretch !important;
+            width: 100% !important;
+            gap: 0 !important;
+        }
+        .za-cols-2 .za-mega-col { flex: 0 0 50% !important; max-width: 50% !important; }
+        .za-cols-3 .za-mega-col { flex: 0 0 33.333333% !important; max-width: 33.333333% !important; }
+        .za-cols-6 .za-mega-col { flex: 0 0 16.666667% !important; max-width: 16.666667% !important; }
+        .za-mega-col {
+            position: relative !important;
+            padding: 0 22px !important;
+            box-sizing: border-box !important;
+            border-right: 1px solid #edf2f7 !important;
+        }
+        .za-mega-col:first-child { padding-left: 0 !important; }
+        .za-mega-col:last-child { padding-right: 0 !important; border-right: none !important; }
+        .za-mega-col-heading {
+            display: block !important;
+            font-family: var(--za-font-heading) !important;
+            font-size: 0.84rem !important;
+            font-weight: 800 !important;
+            color: #0b161e !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.03em !important;
+            line-height: 1.35 !important;
+            min-height: 36px !important;
+            margin-bottom: 4px !important;
+            text-decoration: none !important;
+        }
+        .za-mega-col-bar {
+            display: block !important;
+            width: 32px !important;
+            height: 2px !important;
+            background-color: var(--za-accent-gold) !important;
+            border-radius: 2px !important;
+            margin-top: 4px !important;
+        }
+        .za-mega-links li {
+            display: block !important;
+            margin: 0 0 10px 0 !important;
+            padding: 0 !important;
+            line-height: 1.4 !important;
+        }
+        .za-mega-links a {
+            display: inline-block !important;
+            font-family: var(--za-font-body) !important;
+            font-size: 0.86rem !important;
+            color: #475569 !important;
+            line-height: 1.4 !important;
+            text-decoration: none !important;
+        }
+        .za-mega-links a:hover {
+            color: var(--za-accent-gold) !important;
+            transform: translateX(3px) !important;
+        }
+        .za-footer-strip {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            flex-wrap: wrap !important;
+            gap: 20px !important;
+            padding: 24px 44px !important;
+            background-color: rgba(255, 255, 255, 0.025) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: var(--za-radius-md) !important;
+            margin: 0 16px 28px 16px !important;
+        }
+        @media (max-width: 1200px) {
+            .za-cols-6 .za-mega-inner { flex-wrap: wrap !important; }
+            .za-cols-6 .za-mega-col { flex: 0 0 33.333333% !important; max-width: 33.333333% !important; }
+        }
+        @media (max-width: 768px) {
+            .za-footer-strip {
+                flex-direction: column !important;
+                text-align: center !important;
+                gap: 14px !important;
+                padding: 20px 22px !important;
+                margin: 0 0 24px 0 !important;
+            }
+        }
+    ";
+    wp_add_inline_style('zynova-main-css', $critical_css);
 
     // Theme Custom Scripts
     wp_enqueue_script(

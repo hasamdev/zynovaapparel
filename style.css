@@ -4,7 +4,7 @@ Theme URI: https://zynovaapparel.com/
 Author: Zynova Apparel Development Team
 Author URI: https://zynovaapparel.com/
 Description: Custom high-performance luxury WordPress & WooCommerce theme designed specifically for Zynova Apparel — premium performance gear, motorsport apparel, sportswear, fashion wear, workwear & safety, bags, and accessories. Features mega menus, full responsive layout, quote inquiry system, and high-conversion catalog UX.
-Version: 1.0.8
+Version: 1.0.9
 Requires at least: 6.0
 Tested up to: 7.1.4
 Requires PHP: 7.4
@@ -109,4 +109,25 @@ p {
 button, input, select, textarea {
   font-family: inherit;
 }
+
+/* Core Navigation & Mega Menu Critical Resets */
+ul.za-nav-list,
+ul.za-nav-list li,
+ul.za-mega-links,
+ul.za-mega-links li,
+ul.za-mobile-nav-list,
+ul.za-mobile-sublinks {
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+.za-mega-dropdown ul,
+.za-mega-dropdown ol,
+.za-mega-dropdown li {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 
