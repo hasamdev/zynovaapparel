@@ -64,6 +64,11 @@ function zynova_theme_setup() {
         'footer-categories' => esc_html__('Footer Categories', 'zynova'),
         'footer-company'    => esc_html__('Footer Company Links', 'zynova'),
     ]);
+
+    // Purge LiteSpeed cache on theme update
+    if (has_action('litespeed_purge_all')) {
+        do_action('litespeed_purge_all');
+    }
 }
 add_action('after_setup_theme', 'zynova_theme_setup');
 
