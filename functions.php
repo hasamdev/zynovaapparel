@@ -274,3 +274,9 @@ function zynova_breadcrumbs() {
     echo '</div></nav>';
 }
 
+/**
+ * Product Importer REST API
+ */
+require_once ZYNOVA_THEME_DIR . '/inc/class-product-importer.php';
+
+
