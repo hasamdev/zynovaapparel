@@ -305,12 +305,11 @@ function zynova_render_desktop_navigation() {
         $has_mega = ($item['type'] === 'mega' && !empty($item['columns']));
         $is_active = (is_front_page() && $key === 'home') || ($item['url'] === $current_url);
         
-        $li_classes = ['za-nav-item'];
+        $li_classes = ['za-nav-item', 'item-' . sanitize_html_class($key)];
         if ($has_mega) $li_classes[] = 'has-mega-menu';
         if ($is_active) $li_classes[] = 'is-active';
-        if ($key === 'motorcycling') $li_classes[] = 'item-motorcycling';
 
-        echo '<li class="' . esc_attr(implode(' ', $li_classes)) . '" role="none">';
+        echo '<li class="' . esc_attr(implode(' ', $li_classes)) . '" data-nav-key="' . esc_attr($key) . '" data-nav-title="' . esc_attr($item['title']) . '" role="none">';
         
         echo '<a href="' . esc_url($item['url']) . '" class="za-nav-link" role="menuitem">';
         echo esc_html($item['title']);
@@ -360,7 +359,10 @@ function zynova_render_mobile_navigation() {
     foreach ($tree as $key => $item) {
         $has_mega = ($item['type'] === 'mega' && !empty($item['columns']));
 
-        echo '<li class="za-mobile-nav-item' . ($has_mega ? ' has-accordion' : '') . '">';
+        $m_classes = ['za-mobile-nav-item', 'item-' . sanitize_html_class($key)];
+        if ($has_mega) $m_classes[] = 'has-accordion';
+
+        echo '<li class="' . esc_attr(implode(' ', $m_classes)) . '" data-nav-key="' . esc_attr($key) . '">';
         
         echo '<div class="za-mobile-item-row">';
         echo '<a href="' . esc_url($item['url']) . '" class="za-mobile-link">' . esc_html($item['title']) . '</a>';

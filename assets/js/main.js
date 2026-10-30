@@ -76,7 +76,7 @@
     }
 
     /* ======================================================================
-       3. MOBILE NAVIGATION ACCORDION & DRAWER
+       3. MOBILE NAVIGATION ACCORDION & DRAWER + ADAPTIVE PRIORITY NAVIGATION
        ====================================================================== */
     var $mobileTrigger = $('.za-mobile-menu-trigger');
     var $mobileDrawer = $('#mobile-navigation');
@@ -95,11 +95,145 @@
       $('body').removeClass('za-menu-locked');
     });
 
+    // Close drawer when clicking outside
+    $(document).on('click', function (e) {
+      if ($mobileDrawer.hasClass('is-open') && !$(e.target).closest('#mobile-navigation, .za-mobile-menu-trigger').length) {
+        $mobileTrigger.attr('aria-expanded', 'false');
+        $mobileDrawer.removeClass('is-open');
+        $('body').removeClass('za-menu-locked');
+      }
+    });
+
     // Submenu Accordion in Mobile
     $('.za-mobile-toggle-btn').on('click', function (e) {
       e.preventDefault();
       var $parent = $(this).closest('.za-mobile-nav-item');
       $parent.toggleClass('is-expanded');
+    });
+
+    /* --- Adaptive Header Priority Navigation --- */
+    function zaUpdateAdaptiveHeader() {
+      var $header = $('#masthead');
+      var $container = $header.find('.za-header-container');
+      var $brand = $header.find('.za-brand-wrap');
+      var $nav = $('#site-navigation');
+      var $navList = $nav.find('.za-nav-list');
+      var $items = $navList.children('.za-nav-item');
+      var $actions = $header.find('.za-header-actions');
+      var $trigger = $actions.find('.za-mobile-menu-trigger');
+      var $drawer = $('#mobile-navigation');
+      var $banner = $drawer.find('.za-drawer-adaptive-banner');
+      var $drawerItems = $drawer.find('.za-mobile-nav-item');
+
+      if (!$container.length || !$items.length) {
+        return;
+      }
+
+      var windowWidth = $(window).width();
+
+      // For tablet/mobile screens (<= 992px), standard mobile navigation
+      if (windowWidth <= 992) {
+        $nav.hide();
+        $trigger.css('display', 'inline-flex');
+        $header.addClass('is-mobile-nav').removeClass('has-adaptive-nav');
+        $items.removeClass('is-extra-hidden').css('display', '');
+        $drawerItems.show().removeClass('is-priority-extra is-priority-dimmed');
+        $banner.hide();
+        return;
+      }
+
+      // On desktop screens (> 992px):
+      $header.removeClass('is-mobile-nav');
+      $nav.show();
+
+      // Temporarily ensure all items are visible to measure their natural widths accurately
+      $items.removeClass('is-extra-hidden').css('display', '');
+      $trigger.hide();
+
+      var containerWidth = $container.innerWidth() || $container.width();
+      var brandWidth = $brand.outerWidth(true) || 0;
+
+      // Sum visible actions excluding the hamburger trigger
+      var actionsWidth = 0;
+      $actions.children().not('.za-mobile-menu-trigger').each(function () {
+        if ($(this).is(':visible')) {
+          actionsWidth += $(this).outerWidth(true);
+        }
+      });
+
+      var triggerReservedWidth = 48; // reserved width for hamburger trigger + spacing
+      var safetyGap = 24; // safety margin to prevent any possibility of line wrap or overflow
+
+      var availableWidthForNav = containerWidth - brandWidth - actionsWidth - safetyGap;
+
+      // Calculate width of each top-level nav item
+      var totalItemsWidth = 0;
+      var itemWidths = [];
+      $items.each(function () {
+        var w = $(this).outerWidth(true);
+        itemWidths.push(w);
+        totalItemsWidth += w;
+      });
+
+      // Check if all items fit comfortably
+      if (totalItemsWidth <= availableWidthForNav) {
+        // Everything fits! Hamburger is hidden
+        $trigger.hide();
+        $header.removeClass('has-adaptive-nav');
+        $items.removeClass('is-extra-hidden').css('display', '');
+        $drawerItems.show().removeClass('is-priority-extra is-priority-dimmed');
+        $banner.hide();
+      } else {
+        // Extra items need to move inside the hamburger!
+        var availableWithTrigger = availableWidthForNav - triggerReservedWidth;
+        $trigger.css('display', 'inline-flex');
+        $header.addClass('has-adaptive-nav');
+
+        var currentAccumulatedWidth = 0;
+        var extraKeys = [];
+        var extraCount = 0;
+
+        $items.each(function (idx) {
+          currentAccumulatedWidth += itemWidths[idx];
+          // Keep at least the first item (Home), hide subsequent items that exceed available space
+          if (idx > 0 && currentAccumulatedWidth > availableWithTrigger) {
+            $(this).addClass('is-extra-hidden').css('display', 'none');
+            var key = $(this).data('nav-key');
+            if (key) {
+              extraKeys.push(key);
+            }
+            extraCount++;
+          } else {
+            $(this).removeClass('is-extra-hidden').css('display', '');
+          }
+        });
+
+        // Update drawer items: highlight the extra items that were moved into hamburger
+        if (extraCount > 0) {
+          $banner.show();
+          $drawerItems.each(function () {
+            var key = $(this).data('nav-key');
+            if (extraKeys.indexOf(key) !== -1) {
+              $(this).addClass('is-priority-extra').removeClass('is-priority-dimmed').show();
+            } else {
+              $(this).removeClass('is-priority-extra').addClass('is-priority-dimmed').show();
+            }
+          });
+        } else {
+          $banner.hide();
+          $drawerItems.removeClass('is-priority-extra is-priority-dimmed').show();
+        }
+      }
+    }
+
+    // Run adaptive header on DOM ready, window load, and debounced resize
+    zaUpdateAdaptiveHeader();
+    $(window).on('load', zaUpdateAdaptiveHeader);
+
+    var zaHeaderResizeTimer;
+    $(window).on('resize orientationchange', function () {
+      clearTimeout(zaHeaderResizeTimer);
+      zaHeaderResizeTimer = setTimeout(zaUpdateAdaptiveHeader, 50);
     });
 
     /* ======================================================================

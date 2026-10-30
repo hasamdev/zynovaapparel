@@ -110,9 +110,28 @@
   color: var(--za-white);
   border: 1.5px solid var(--za-accent-gold);
   border-radius: var(--za-radius-sm);
-  padding: 9px 20px;
+  padding: 0 18px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-size: 0.88rem;
   font-weight: 600;
+  box-sizing: border-box;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--za-transition-normal);
+}
+
+.za-btn-quote-text {
+  display: inline;
+}
+
+.za-btn-quote-short {
+  display: none;
 }
 
 .za-btn-quote:hover {
@@ -143,6 +162,7 @@
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all var(--za-transition-normal);
+  overflow-x: clip;
 }
 
 body.admin-bar .za-site-header {
@@ -163,6 +183,8 @@ body.admin-bar .za-site-header {
   max-width: var(--za-max-w);
   margin: 0 auto;
   padding: 0 24px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .za-header-spacer {
@@ -172,6 +194,9 @@ body.admin-bar .za-site-header {
 
 /* Brand Logo */
 .za-brand-wrap {
+  display: flex;
+  align-items: center;
+  height: 100%;
   flex-shrink: 0;
 }
 
@@ -179,6 +204,7 @@ body.admin-bar .za-site-header {
   display: flex;
   align-items: center;
   gap: 14px;
+  height: 100%;
   text-decoration: none;
 }
 
@@ -187,7 +213,7 @@ body.admin-bar .za-site-header {
   height: 44px;
   border: 2px solid var(--za-white);
   border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--za-font-heading);
@@ -196,17 +222,21 @@ body.admin-bar .za-site-header {
   color: var(--za-white);
   letter-spacing: 0.05em;
   line-height: 1;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .za-brand-divider {
   width: 1px;
   height: 36px;
   background-color: rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
 }
 
 .za-brand-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .za-brand-name {
@@ -222,23 +252,30 @@ body.admin-bar .za-site-header {
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.7);
   letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
 /* Desktop Navigation */
 .za-main-navigation {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 14px;
 }
 
 .za-nav-list {
   display: flex;
   align-items: center;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
   height: 100%;
   gap: 4px;
+  flex-wrap: nowrap;
 }
 
 .za-nav-item {
@@ -246,13 +283,27 @@ body.admin-bar .za-site-header {
   height: 100%;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+}
+
+.za-nav-item.is-extra-hidden {
+  display: none !important;
 }
 
 .za-nav-link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: 0 14px;
+  padding: 0 12px;
+  height: 100%;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+  transition: color var(--za-transition-fast);
+  white-space: nowrap;
+}
   height: 100%;
   color: #cbd5e1;
   font-size: 0.92rem;
@@ -433,23 +484,28 @@ body.admin-bar .za-site-header {
 .za-header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: flex-end;
+  gap: 14px;
+  height: 100%;
   flex-shrink: 0;
 }
 
 .za-header-cart-btn {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
   color: var(--za-white);
-  transition: color var(--za-transition-fast);
+  border-radius: 6px;
+  transition: color var(--za-transition-fast), background-color var(--za-transition-fast);
+  flex-shrink: 0;
 }
 
 .za-header-cart-btn:hover {
   color: var(--za-accent-gold);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .za-cart-badge {
@@ -468,14 +524,28 @@ body.admin-bar .za-site-header {
   justify-content: center;
 }
 
-/* Mobile Hamburger */
+/* Mobile & Adaptive Hamburger */
 .za-mobile-menu-trigger {
   display: none;
-  background: none;
-  border: none;
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
   cursor: pointer;
   color: var(--za-white);
+  padding: 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: all var(--za-transition-fast);
+}
+
+.za-mobile-menu-trigger:hover {
+  background: rgba(200, 155, 60, 0.15);
+  border-color: var(--za-accent-gold);
+  color: var(--za-accent-gold);
 }
 
 .za-hamburger-box {
@@ -554,6 +624,24 @@ body.admin-bar .za-site-header {
   padding: 20px 24px;
 }
 
+.za-drawer-adaptive-banner {
+  padding: 10px 14px;
+  margin: 0 0 16px 0;
+  background: rgba(200, 155, 60, 0.12);
+  border-left: 3px solid var(--za-accent-gold);
+  border-radius: 4px;
+}
+
+.za-drawer-adaptive-badge {
+  font-family: var(--za-font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--za-accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+}
+
 .za-mobile-nav-list {
   list-style: none;
   margin: 0;
@@ -562,6 +650,17 @@ body.admin-bar .za-site-header {
 
 .za-mobile-nav-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all var(--za-transition-fast);
+}
+
+.za-mobile-nav-item.is-priority-extra {
+  background: rgba(200, 155, 60, 0.07);
+  border-left: 3px solid var(--za-accent-gold);
+  padding-left: 10px;
+}
+
+.za-mobile-nav-item.is-priority-dimmed {
+  opacity: 0.8;
 }
 
 .za-mobile-item-row {
@@ -1576,7 +1675,7 @@ body.admin-bar .za-site-header {
 /* ==========================================================================
    12. RESPONSIVE BREAKPOINTS
    ========================================================================== */
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
   .za-cols-6 .za-mega-inner {
     flex-wrap: wrap !important;
   }
@@ -1586,19 +1685,25 @@ body.admin-bar .za-site-header {
     max-width: 33.333333% !important;
   }
 
+  .za-nav-link {
+    padding: 0 9px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 1200px) {
   .za-products-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 1024px) {
-  .za-main-navigation,
-  .za-btn-quote {
-    display: none;
+@media (max-width: 992px) {
+  .za-main-navigation {
+    display: none !important;
   }
 
   .za-mobile-menu-trigger {
-    display: block;
+    display: inline-flex !important;
   }
 
   .za-category-grid {
@@ -1616,6 +1721,69 @@ body.admin-bar .za-site-header {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --za-header-height: 64px;
+  }
+
+  .za-site-header {
+    height: 64px;
+  }
+
+  .za-header-container {
+    height: 64px;
+    padding: 0 14px !important;
+  }
+
+  .za-brand-divider,
+  .za-brand-tagline {
+    display: none !important;
+  }
+
+  .za-brand-link {
+    gap: 8px !important;
+  }
+
+  .za-logo-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.05rem !important;
+    border-radius: 6px !important;
+  }
+
+  .za-brand-name {
+    font-size: 1.05rem !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .za-header-actions {
+    gap: 8px !important;
+  }
+
+  .za-header-cart-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .za-btn-quote {
+    height: 36px !important;
+    padding: 0 12px !important;
+    font-size: 0.8rem !important;
+    gap: 6px !important;
+  }
+
+  .za-btn-quote-text {
+    display: none !important;
+  }
+
+  .za-btn-quote-short {
+    display: inline !important;
+  }
+
+  .za-mobile-menu-trigger {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
   .za-hero-title {
     font-size: 2.25rem;
   }
@@ -1658,7 +1826,49 @@ body.admin-bar .za-site-header {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 420px) {
+  .za-header-container {
+    padding: 0 10px !important;
+  }
+
+  .za-header-actions {
+    gap: 6px !important;
+  }
+
+  .za-logo-icon {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.95rem !important;
+    border-radius: 5px !important;
+  }
+
+  .za-brand-name {
+    font-size: 0.95rem !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .za-header-cart-btn {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .za-btn-quote {
+    height: 34px !important;
+    padding: 0 9px !important;
+    font-size: 0.76rem !important;
+    gap: 4px !important;
+  }
+
+  .za-btn-quote-icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .za-mobile-menu-trigger {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
   .za-products-grid {
     grid-template-columns: 1fr;
   }

@@ -61,16 +61,17 @@ if (!defined('ABSPATH')) {
                     </a>
                 <?php endif; ?>
 
-                <button type="button" class="za-btn za-btn-quote za-open-quote-modal">
-                    <span>Request a Quote</span>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button type="button" class="za-btn za-btn-quote za-open-quote-modal" aria-label="<?php esc_attr_e('Request a Quote', 'zynova'); ?>">
+                    <span class="za-btn-quote-text"><?php esc_html_e('Request a Quote', 'zynova'); ?></span>
+                    <span class="za-btn-quote-short"><?php esc_html_e('Quote', 'zynova'); ?></span>
+                    <svg class="za-btn-quote-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                 </button>
 
-                <!-- Mobile Hamburger Toggle -->
-                <button type="button" class="za-mobile-menu-trigger" aria-controls="mobile-navigation" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle mobile navigation menu', 'zynova'); ?>">
+                <!-- Mobile / Adaptive Hamburger Toggle -->
+                <button type="button" class="za-mobile-menu-trigger" aria-controls="mobile-navigation" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation menu', 'zynova'); ?>">
                     <span class="za-hamburger-box">
                         <span class="za-hamburger-inner"></span>
                     </span>
@@ -78,7 +79,7 @@ if (!defined('ABSPATH')) {
             </div>
         </div>
 
-        <!-- Mobile Navigation Drawer -->
+        <!-- Mobile / Adaptive Navigation Drawer -->
         <div id="mobile-navigation" class="za-mobile-drawer" aria-hidden="true">
             <div class="za-mobile-drawer-header">
                 <div class="za-brand-text">
@@ -87,6 +88,9 @@ if (!defined('ABSPATH')) {
                 <button type="button" class="za-mobile-drawer-close" aria-label="Close menu">&times;</button>
             </div>
             <div class="za-mobile-drawer-body">
+                <div class="za-drawer-adaptive-banner" style="display:none;">
+                    <span class="za-drawer-adaptive-badge"><?php esc_html_e('Additional Categories & Pages', 'zynova'); ?></span>
+                </div>
                 <?php zynova_render_mobile_navigation(); ?>
                 
                 <div class="za-mobile-cta">

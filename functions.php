@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.1.2');
+define('ZYNOVA_THEME_VERSION', '1.1.4');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -102,6 +102,177 @@ function zynova_scripts() {
 
     // Injected critical CSS overrides to guarantee immediate cache-free rendering
     $critical_css = "
+        /* Header Layout & Middle Alignment */
+        .za-site-header {
+            overflow-x: clip !important;
+        }
+        .za-header-container {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            height: var(--za-header-height) !important;
+            max-width: var(--za-max-w) !important;
+            margin: 0 auto !important;
+            padding: 0 24px !important;
+            box-sizing: border-box !important;
+            width: 100% !important;
+        }
+        .za-brand-wrap {
+            display: flex !important;
+            align-items: center !important;
+            height: 100% !important;
+            flex-shrink: 0 !important;
+        }
+        .za-brand-link {
+            display: flex !important;
+            align-items: center !important;
+            gap: 14px !important;
+            height: 100% !important;
+            text-decoration: none !important;
+        }
+        .za-logo-icon {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important;
+            box-sizing: border-box !important;
+            flex-shrink: 0 !important;
+        }
+        .za-main-navigation {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 100% !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            margin: 0 14px !important;
+        }
+        .za-nav-list {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 100% !important;
+            gap: 4px !important;
+            flex-wrap: nowrap !important;
+        }
+        .za-nav-item {
+            display: flex !important;
+            align-items: center !important;
+            height: 100% !important;
+            flex-shrink: 0 !important;
+        }
+        .za-nav-item.is-extra-hidden {
+            display: none !important;
+        }
+        .za-nav-link {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 100% !important;
+            white-space: nowrap !important;
+        }
+        .za-header-actions {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            height: 100% !important;
+            gap: 14px !important;
+            flex-shrink: 0 !important;
+        }
+        .za-header-cart-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            flex-shrink: 0 !important;
+        }
+        .za-btn-quote {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            height: 40px !important;
+            padding: 0 18px !important;
+            font-size: 0.88rem !important;
+            font-weight: 600 !important;
+            box-sizing: border-box !important;
+            line-height: 1 !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+        }
+        .za-btn-quote-text {
+            display: inline !important;
+        }
+        .za-btn-quote-short {
+            display: none !important;
+        }
+        .za-mobile-menu-trigger {
+            display: none;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            background: rgba(255, 255, 255, 0.06) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            border-radius: 6px !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+            flex-shrink: 0 !important;
+        }
+        .za-drawer-adaptive-banner {
+            padding: 10px 14px !important;
+            margin: 0 0 16px 0 !important;
+            background: rgba(200, 155, 60, 0.12) !important;
+            border-left: 3px solid var(--za-accent-gold) !important;
+            border-radius: 4px !important;
+        }
+        .za-drawer-adaptive-badge {
+            font-family: var(--za-font-heading) !important;
+            font-size: 0.76rem !important;
+            font-weight: 700 !important;
+            color: var(--za-accent-gold) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.06em !important;
+            display: block !important;
+        }
+        .za-mobile-nav-item.is-priority-extra {
+            background: rgba(200, 155, 60, 0.07) !important;
+            border-left: 3px solid var(--za-accent-gold) !important;
+            padding-left: 10px !important;
+        }
+        @media (max-width: 1260px) {
+            .za-nav-link { padding: 0 8px !important; font-size: 0.84rem !important; }
+        }
+        @media (max-width: 992px) {
+            .za-main-navigation { display: none !important; }
+            .za-mobile-menu-trigger { display: inline-flex !important; }
+        }
+        @media (max-width: 768px) {
+            :root { --za-header-height: 64px !important; }
+            .za-site-header { height: 64px !important; }
+            .za-header-container { height: 64px !important; padding: 0 14px !important; }
+            .za-brand-divider, .za-brand-tagline { display: none !important; }
+            .za-brand-link { gap: 8px !important; }
+            .za-logo-icon { width: 36px !important; height: 36px !important; font-size: 1.05rem !important; border-radius: 6px !important; }
+            .za-brand-name { font-size: 1.05rem !important; letter-spacing: 0.04em !important; }
+            .za-header-actions { gap: 8px !important; }
+            .za-header-cart-btn { width: 36px !important; height: 36px !important; }
+            .za-btn-quote { height: 36px !important; padding: 0 12px !important; font-size: 0.8rem !important; gap: 6px !important; }
+            .za-btn-quote-text { display: none !important; }
+            .za-btn-quote-short { display: inline !important; }
+            .za-mobile-menu-trigger { width: 36px !important; height: 36px !important; }
+        }
+        @media (max-width: 420px) {
+            .za-header-container { padding: 0 10px !important; }
+            .za-header-actions { gap: 6px !important; }
+            .za-logo-icon { width: 32px !important; height: 32px !important; font-size: 0.95rem !important; border-radius: 5px !important; }
+            .za-brand-name { font-size: 0.95rem !important; letter-spacing: 0.02em !important; }
+            .za-header-cart-btn { width: 34px !important; height: 34px !important; }
+            .za-btn-quote { height: 34px !important; padding: 0 9px !important; font-size: 0.76rem !important; gap: 4px !important; }
+            .za-btn-quote-icon { width: 12px !important; height: 12px !important; }
+            .za-mobile-menu-trigger { width: 34px !important; height: 34px !important; }
+        }
         .za-mega-dropdown ul, .za-mega-dropdown ol, .za-mega-dropdown li,
         ul.za-mega-links, ul.za-mega-links li {
             list-style: none !important;
