@@ -174,9 +174,18 @@ while (have_posts()) : the_post();
 
             <!-- LEFT COLUMN: Image Box, 3 Thumbnails, Detail Tabs -->
             <div class="za-product-left-col">
-                <!-- Main Image Display Box -->
-                <div class="za-main-img-box">
+                <!-- Main Image Display Box with Zoom & Enlarge Indicator -->
+                <div class="za-main-img-box" id="za-main-img-box" title="<?php esc_attr_e('Click to enlarge image', 'zynova'); ?>" data-active-index="0">
                     <img id="za-active-product-img" src="<?php echo esc_url($main_img_url); ?>" alt="<?php echo esc_attr($title); ?>" class="za-main-display-img">
+                    <div class="za-zoom-badge">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            <line x1="11" y1="8" x2="11" y2="14"></line>
+                            <line x1="8" y1="11" x2="14" y2="11"></line>
+                        </svg>
+                        <span>Click to Enlarge</span>
+                    </div>
                 </div>
 
                 <!-- 3 Square Thumbnails Grid (Exact match to screenshot) -->
@@ -187,7 +196,7 @@ while (have_posts()) : the_post();
                         $display_thumbs = array_slice($all_images, 0, 3);
                         foreach ($display_thumbs as $i => $img) : 
                         ?>
-                            <button type="button" class="za-thumb-btn <?php echo $i === 0 ? 'is-active' : ''; ?>" data-full-url="<?php echo esc_url($img['url']); ?>" aria-label="View product view <?php echo $i + 1; ?>">
+                            <button type="button" class="za-thumb-btn <?php echo $i === 0 ? 'is-active' : ''; ?>" data-full-url="<?php echo esc_url($img['url']); ?>" data-index="<?php echo $i; ?>" aria-label="View product view <?php echo $i + 1; ?>">
                                 <img src="<?php echo esc_url($img['thumb'] ?: $img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>" class="za-thumb-img">
                             </button>
                         <?php endforeach; ?>
@@ -411,6 +420,38 @@ while (have_posts()) : the_post();
                 </div>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Hidden Gallery Data for JavaScript Lightbox -->
+<?php
+$gallery_clean_data = array_map(function($img) {
+    return [
+        'url'   => $img['url'],
+        'thumb' => $img['thumb'] ?: $img['url'],
+        'alt'   => $img['alt'] ?? ''
+    ];
+}, $all_images);
+?>
+<div id="za-gallery-json" style="display:none;" data-gallery="<?php echo esc_attr(wp_json_encode($gallery_clean_data)); ?>"></div>
+
+<!-- Product Image Lightbox Modal (Click to Enlarge) -->
+<div id="za-image-lightbox" class="za-lightbox-modal" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e('Enlarged Product Image View', 'zynova'); ?>">
+    <div class="za-lightbox-backdrop"></div>
+    <div class="za-lightbox-container">
+        <button type="button" class="za-lightbox-close" aria-label="<?php esc_attr_e('Close enlarged view', 'zynova'); ?>">&times;</button>
+        <?php if (count($all_images) > 1) : ?>
+            <button type="button" class="za-lightbox-arrow za-lightbox-prev" aria-label="<?php esc_attr_e('Previous image', 'zynova'); ?>">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" class="za-lightbox-arrow za-lightbox-next" aria-label="<?php esc_attr_e('Next image', 'zynova'); ?>">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        <?php endif; ?>
+        <div class="za-lightbox-content">
+            <img id="za-lightbox-img" src="<?php echo esc_url($main_img_url); ?>" alt="<?php echo esc_attr($title); ?>" class="za-lightbox-display-img">
+            <div class="za-lightbox-caption"><?php echo esc_html($title); ?></div>
         </div>
     </div>
 </div>

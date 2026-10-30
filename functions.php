@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.1.4');
+define('ZYNOVA_THEME_VERSION', '1.1.5');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -362,38 +362,68 @@ function zynova_scripts() {
                 margin: 0 0 24px 0 !important;
             }
         }
-        /* Single Product Screenshot Pixel-Perfect Layout */
+        /* Single Product Screenshot Pixel-Perfect Layout - Matching Overall Website Width */
         .za-single-product-container {
-            max-width: 1040px !important;
+            max-width: var(--za-max-w) !important;
+            width: 100% !important;
             margin: 0 auto !important;
-            padding: 0 20px !important;
+            padding: 0 24px !important;
             box-sizing: border-box !important;
         }
         .za-single-product-grid {
             display: grid !important;
-            grid-template-columns: 430px 1fr !important;
-            gap: 40px !important;
+            grid-template-columns: minmax(0, 520px) 1fr !important;
+            gap: 48px !important;
             align-items: start !important;
         }
         .za-main-img-box {
             background: #f4f5f7 !important;
             border: 1px solid #e5e7eb !important;
             border-radius: 8px !important;
+            overflow: hidden !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            padding: 12px !important;
+            padding: 0 !important;
             width: 100% !important;
-            height: 460px !important;
+            height: 520px !important;
+            position: relative !important;
+            cursor: zoom-in !important;
             box-sizing: border-box !important;
+            user-select: none !important;
         }
         .za-main-display-img {
-            max-width: 100% !important;
-            max-height: 100% !important;
-            width: auto !important;
-            height: auto !important;
-            object-fit: contain !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            object-fit: cover !important;
             object-position: center !important;
+            display: block !important;
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+            pointer-events: none !important;
+        }
+        .za-zoom-badge {
+            position: absolute !important;
+            bottom: 14px !important;
+            right: 14px !important;
+            background: rgba(11, 22, 30, 0.78) !important;
+            color: #ffffff !important;
+            padding: 6px 14px !important;
+            border-radius: 20px !important;
+            font-size: 0.78rem !important;
+            font-weight: 600 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            pointer-events: none !important;
+            backdrop-filter: blur(6px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+            transition: opacity 0.25s ease, transform 0.25s ease !important;
+            z-index: 2 !important;
+        }
+        .za-main-img-box:hover .za-zoom-badge {
+            opacity: 0.25 !important;
         }
         .za-gallery-thumbs-grid {
             display: grid !important;
@@ -598,14 +628,141 @@ function zynova_scripts() {
             width: 22px !important;
             height: 22px !important;
         }
+        /* Lightbox Modal */
+        .za-lightbox-modal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 99999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transition: opacity 0.3s ease, visibility 0.3s ease !important;
+        }
+        .za-lightbox-modal.is-open {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        body.za-lightbox-locked {
+            overflow: hidden !important;
+        }
+        .za-lightbox-backdrop {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(11, 22, 30, 0.94) !important;
+            backdrop-filter: blur(8px) !important;
+            cursor: pointer !important;
+        }
+        .za-lightbox-container {
+            position: relative !important;
+            z-index: 2 !important;
+            max-width: 92vw !important;
+            max-height: 90vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .za-lightbox-content {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+        .za-lightbox-display-img {
+            max-width: 86vw !important;
+            max-height: 78vh !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: contain !important;
+            border-radius: 8px !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
+            background: #0f172a !important;
+        }
+        .za-lightbox-caption {
+            margin-top: 14px !important;
+            color: #ffffff !important;
+            font-family: var(--za-font-heading) !important;
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.04em !important;
+            text-align: center !important;
+        }
+        .za-lightbox-close {
+            position: absolute !important;
+            top: -48px !important;
+            right: 0 !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+            border: none !important;
+            color: #ffffff !important;
+            width: 42px !important;
+            height: 42px !important;
+            border-radius: 50% !important;
+            font-size: 2rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            line-height: 1 !important;
+            transition: all 0.2s ease !important;
+        }
+        .za-lightbox-close:hover {
+            background: var(--za-accent-gold) !important;
+            color: #0b161e !important;
+            transform: scale(1.08) !important;
+        }
+        .za-lightbox-arrow {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+            border: none !important;
+            color: #ffffff !important;
+            width: 50px !important;
+            height: 50px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            z-index: 3 !important;
+        }
+        .za-lightbox-arrow:hover {
+            background: var(--za-accent-gold) !important;
+            color: #0b161e !important;
+            transform: translateY(-50%) scale(1.08) !important;
+        }
+        .za-lightbox-prev { left: -65px !important; }
+        .za-lightbox-next { right: -65px !important; }
+        @media (max-width: 1100px) {
+            .za-single-product-grid { grid-template-columns: 460px 1fr !important; gap: 36px !important; }
+        }
         @media (max-width: 991px) {
             .za-single-product-grid {
                 grid-template-columns: 1fr !important;
                 gap: 32px !important;
             }
             .za-main-img-box {
-                height: 400px !important;
+                height: 440px !important;
             }
+            .za-lightbox-prev { left: 10px !important; }
+            .za-lightbox-next { right: 10px !important; }
+            .za-lightbox-close { top: 10px !important; right: 10px !important; }
+        }
+        @media (max-width: 640px) {
+            .za-main-img-box { height: 380px !important; }
+        }
+        @media (max-width: 480px) {
+            .za-main-img-box { height: 320px !important; }
         }
     ";
     wp_add_inline_style('zynova-main-css', $critical_css);

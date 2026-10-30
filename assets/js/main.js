@@ -323,18 +323,130 @@
     });
 
     /* ======================================================================
-       5. SINGLE PRODUCT PAGE INTERACTIONS (SCREENSHOT ALIGNED)
+       5. SINGLE PRODUCT PAGE INTERACTIONS: ZOOM, LIGHTBOX & VARIATIONS
        ====================================================================== */
+    var $mainImgBox = $('#za-main-img-box');
+    var $activeImg = $('#za-active-product-img');
+    var $lightbox = $('#za-image-lightbox');
+    var $lightboxImg = $('#za-lightbox-img');
+    var galleryData = [];
+    var currentImgIndex = 0;
+
+    // Load gallery data if present
+    var $galleryJsonEl = $('#za-gallery-json');
+    if ($galleryJsonEl.length) {
+      try {
+        galleryData = JSON.parse($galleryJsonEl.attr('data-gallery') || '[]');
+      } catch (err) {
+        galleryData = [];
+      }
+    }
+
+    // 1. Interactive Hover Zoom on Main Image Box
+    $mainImgBox.on('mousemove', function (e) {
+      var offset = $(this).offset();
+      var width = $(this).width();
+      var height = $(this).height();
+      if (!width || !height) return;
+
+      var x = ((e.pageX - offset.left) / width) * 100;
+      var y = ((e.pageY - offset.top) / height) * 100;
+
+      x = Math.max(0, Math.min(100, x));
+      y = Math.max(0, Math.min(100, y));
+
+      $activeImg.css({
+        'transform-origin': x + '% ' + y + '%',
+        'transform': 'scale(1.65)'
+      });
+    }).on('mouseleave', function () {
+      $activeImg.css({
+        'transform-origin': 'center center',
+        'transform': 'scale(1)'
+      });
+    });
+
+    // Helper: update active product image and sync lightbox
+    function setActiveImage(index, url) {
+      currentImgIndex = index;
+      var targetUrl = url;
+      if (!targetUrl && galleryData[index]) {
+        targetUrl = galleryData[index].url;
+      }
+      if (targetUrl) {
+        $activeImg.attr('src', targetUrl);
+        $lightboxImg.attr('src', targetUrl);
+      }
+      $mainImgBox.attr('data-active-index', currentImgIndex);
+
+      // Sync active state on thumbnails
+      $('.za-thumb-btn').removeClass('is-active').filter(function () {
+        return parseInt($(this).data('index'), 10) === currentImgIndex || $(this).data('full-url') === targetUrl;
+      }).addClass('is-active');
+    }
+
+    // 2. Click to Enlarge / Lightbox Functionality
+    $mainImgBox.on('click', function (e) {
+      e.preventDefault();
+      var currentSrc = $activeImg.attr('src');
+      $lightboxImg.attr('src', currentSrc);
+      $lightbox.addClass('is-open').attr('aria-hidden', 'false');
+      $('body').addClass('za-lightbox-locked');
+    });
+
+    function closeLightbox() {
+      $lightbox.removeClass('is-open').attr('aria-hidden', 'true');
+      $('body').removeClass('za-lightbox-locked');
+    }
+
+    $lightbox.on('click', '.za-lightbox-close, .za-lightbox-backdrop', function (e) {
+      e.preventDefault();
+      closeLightbox();
+    });
+
+    // Lightbox Previous / Next Navigation
+    function prevLightboxImage() {
+      if (galleryData.length <= 1) return;
+      var newIndex = (currentImgIndex - 1 + galleryData.length) % galleryData.length;
+      setActiveImage(newIndex);
+    }
+
+    function nextLightboxImage() {
+      if (galleryData.length <= 1) return;
+      var newIndex = (currentImgIndex + 1) % galleryData.length;
+      setActiveImage(newIndex);
+    }
+
+    $lightbox.on('click', '.za-lightbox-prev', function (e) {
+      e.preventDefault();
+      prevLightboxImage();
+    });
+
+    $lightbox.on('click', '.za-lightbox-next', function (e) {
+      e.preventDefault();
+      nextLightboxImage();
+    });
+
+    // Keyboard support for Lightbox
+    $(document).on('keydown', function (e) {
+      if ($lightbox.hasClass('is-open')) {
+        if (e.key === 'Escape') {
+          closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+          prevLightboxImage();
+        } else if (e.key === 'ArrowRight') {
+          nextLightboxImage();
+        }
+      }
+    });
+
     // Gallery Thumbnail Click
     $(document).on('click', '.za-thumb-btn', function (e) {
       e.preventDefault();
-      $('.za-thumb-btn').removeClass('is-active');
-      $(this).addClass('is-active');
-
+      var idx = parseInt($(this).data('index'), 10);
+      if (isNaN(idx)) idx = $(this).index();
       var fullUrl = $(this).data('full-url');
-      if (fullUrl && $('#za-active-product-img').length) {
-        $('#za-active-product-img').attr('src', fullUrl);
-      }
+      setActiveImage(idx, fullUrl);
     });
 
     // Style Variant Dropdown Sync with Gallery
