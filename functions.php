@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.1.5');
+define('ZYNOVA_THEME_VERSION', '1.1.6');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -161,9 +161,6 @@ function zynova_scripts() {
             height: 100% !important;
             flex-shrink: 0 !important;
         }
-        .za-nav-item.is-extra-hidden {
-            display: none !important;
-        }
         .za-nav-link {
             display: inline-flex !important;
             align-items: center !important;
@@ -219,27 +216,6 @@ function zynova_scripts() {
             padding: 0 !important;
             box-sizing: border-box !important;
             flex-shrink: 0 !important;
-        }
-        .za-drawer-adaptive-banner {
-            padding: 10px 14px !important;
-            margin: 0 0 16px 0 !important;
-            background: rgba(200, 155, 60, 0.12) !important;
-            border-left: 3px solid var(--za-accent-gold) !important;
-            border-radius: 4px !important;
-        }
-        .za-drawer-adaptive-badge {
-            font-family: var(--za-font-heading) !important;
-            font-size: 0.76rem !important;
-            font-weight: 700 !important;
-            color: var(--za-accent-gold) !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.06em !important;
-            display: block !important;
-        }
-        .za-mobile-nav-item.is-priority-extra {
-            background: rgba(200, 155, 60, 0.07) !important;
-            border-left: 3px solid var(--za-accent-gold) !important;
-            padding-left: 10px !important;
         }
         @media (max-width: 1260px) {
             .za-nav-link { padding: 0 8px !important; font-size: 0.84rem !important; }
@@ -841,7 +817,7 @@ function zynova_breadcrumbs() {
     } elseif (is_post_type_archive('product')) {
         echo '<span>Shop Catalog</span>';
     } else {
-        echo '<span>' . esc_html(get_the_title()) . '</span>';
+        echo '<span>' . esc_html(wp_strip_all_tags(html_entity_decode(html_entity_decode(get_the_title(), ENT_QUOTES | ENT_HTML5, 'UTF-8'), ENT_QUOTES | ENT_HTML5, 'UTF-8'))) . '</span>';
     }
 
     echo '</div></nav>';

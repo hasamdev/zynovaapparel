@@ -23,7 +23,10 @@ while (have_posts()) : the_post();
     }
 
     $product_id   = get_the_ID();
-    $title        = get_the_title();
+    $raw_title    = get_the_title();
+    // Fully decode HTML entities (e.g. &amp;, &#038;, &quot;) before uppercase so &AMP; never occurs
+    $title        = wp_strip_all_tags(html_entity_decode(html_entity_decode($raw_title, ENT_QUOTES | ENT_HTML5, 'UTF-8'), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+    $title_upper  = mb_strtoupper($title, 'UTF-8');
     $slug         = $product ? $product->get_slug() : sanitize_title($title);
     $is_sahara    = ($slug === 'sahara-pro-race-suit' || stripos($title, 'sahara') !== false);
 
@@ -128,7 +131,7 @@ while (have_posts()) : the_post();
             'DELIVERY:'   => '15-20 Days Doorstep Delivery Worldwide (DHL/FedEx).',
         ];
     } else {
-        $tab_heading = 'ENGINEERED FOR SUPREME PERFORMANCE WITH ' . strtoupper($title);
+        $tab_heading = 'ENGINEERED FOR SUPREME PERFORMANCE WITH ' . $title_upper;
         $tab_lead    = 'Designed and precision-manufactured for teams and athletes who demand zero compromises. Built with export-grade craftsmanship in Sialkot, Pakistan.';
         $specs = [
             'OUTER:'      => 'Export-grade high-tensile fabric / genuine full-grain leather engineered for maximum wear durability.',
@@ -157,13 +160,14 @@ while (have_posts()) : the_post();
                     $terms = wc_get_product_terms($product_id, 'product_cat', ['orderby' => 'parent', 'order' => 'ASC']);
                     if (!empty($terms)) {
                         foreach ($terms as $t) {
-                            echo '<a href="' . esc_url(get_term_link($t)) . '">' . esc_html($t->name) . '</a>';
+                            $term_name = wp_strip_all_tags(html_entity_decode(html_entity_decode($t->name, ENT_QUOTES | ENT_HTML5, 'UTF-8'), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                            echo '<a href="' . esc_url(get_term_link($t)) . '">' . esc_html($term_name) . '</a>';
                             echo '<span class="za-sep">&gt;</span>';
                         }
                     }
                     ?>
                 <?php endif; ?>
-                <span class="za-current-crumb"><?php echo esc_html(strtoupper($title)); ?></span>
+                <span class="za-current-crumb"><?php echo esc_html($title_upper); ?></span>
             </nav>
         </div>
     </div>
@@ -294,7 +298,7 @@ while (have_posts()) : the_post();
             <!-- RIGHT COLUMN: Title, Ratings, Key Features, Variations, Price on Request, CTAs, Trust Badges -->
             <div class="za-product-right-col">
                 <!-- Title with ZYNOVA APPAREL Suffix -->
-                <h1 class="za-p-title"><?php echo esc_html(strtoupper($title)); ?> - ZYNOVA APPAREL</h1>
+                <h1 class="za-p-title"><?php echo esc_html($title_upper); ?> - ZYNOVA APPAREL</h1>
 
                 <!-- Rating and Review Counter -->
                 <div class="za-p-rating-row">

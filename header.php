@@ -79,7 +79,7 @@ if (!defined('ABSPATH')) {
             </div>
         </div>
 
-        <!-- Mobile / Adaptive Navigation Drawer -->
+        <!-- Mobile Navigation Drawer -->
         <div id="mobile-navigation" class="za-mobile-drawer" aria-hidden="true">
             <div class="za-mobile-drawer-header">
                 <div class="za-brand-text">
@@ -88,9 +88,6 @@ if (!defined('ABSPATH')) {
                 <button type="button" class="za-mobile-drawer-close" aria-label="Close menu">&times;</button>
             </div>
             <div class="za-mobile-drawer-body">
-                <div class="za-drawer-adaptive-banner" style="display:none;">
-                    <span class="za-drawer-adaptive-badge"><?php esc_html_e('Additional Categories & Pages', 'zynova'); ?></span>
-                </div>
                 <?php zynova_render_mobile_navigation(); ?>
                 
                 <div class="za-mobile-cta">
