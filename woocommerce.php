@@ -9,6 +9,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (is_singular('product') || is_product()) {
+    require ZYNOVA_THEME_DIR . '/single-product.php';
+    return;
+}
+
 get_header();
 ?>
 

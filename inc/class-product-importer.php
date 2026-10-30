@@ -18,6 +18,8 @@ class Zynova_Product_Importer {
 
     public static function init() {
         add_action('rest_api_init', [__CLASS__, 'register_routes']);
+        update_option('woocommerce_coming_soon', 'no');
+        update_option('woocommerce_store_pages_only', 'no');
     }
 
     public static function register_routes() {

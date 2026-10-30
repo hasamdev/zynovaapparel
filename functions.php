@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.0.9');
+define('ZYNOVA_THEME_VERSION', '1.1.0');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -189,6 +189,140 @@ function zynova_scripts() {
                 gap: 14px !important;
                 padding: 20px 22px !important;
                 margin: 0 0 24px 0 !important;
+            }
+        }
+        /* Single Product Screenshot Layout */
+        .za-single-product-grid {
+            display: grid !important;
+            grid-template-columns: 50% 50% !important;
+            gap: 48px !important;
+            align-items: start !important;
+        }
+        .za-main-img-box {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 24px !important;
+            min-height: 480px !important;
+            max-height: 560px !important;
+            box-sizing: border-box !important;
+        }
+        .za-main-display-img {
+            max-width: 100% !important;
+            max-height: 500px !important;
+            object-fit: contain !important;
+        }
+        .za-gallery-thumbs-list {
+            display: flex !important;
+            gap: 12px !important;
+            align-items: center !important;
+            margin-top: 14px !important;
+            overflow-x: auto !important;
+        }
+        .za-thumb-btn {
+            flex: 0 0 96px !important;
+            width: 96px !important;
+            height: 96px !important;
+            border: 1.5px solid #e2e8f0 !important;
+            border-radius: 6px !important;
+            background: #ffffff !important;
+            cursor: pointer !important;
+            padding: 6px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .za-thumb-btn.is-active {
+            border-color: #0b161e !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        }
+        .za-thumb-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+        }
+        .za-p-title {
+            font-family: var(--za-font-heading) !important;
+            font-size: 1.68rem !important;
+            font-weight: 800 !important;
+            color: #0b161e !important;
+            text-transform: uppercase !important;
+            line-height: 1.24 !important;
+            margin: 0 0 10px 0 !important;
+        }
+        .za-p-rating-row {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-bottom: 22px !important;
+        }
+        .za-key-features-card {
+            margin-bottom: 24px !important;
+        }
+        .za-kf-heading {
+            font-family: var(--za-font-heading) !important;
+            font-size: 1.1rem !important;
+            font-weight: 800 !important;
+            color: #0b161e !important;
+            margin: 0 0 14px 0 !important;
+        }
+        .za-kf-list {
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+        }
+        .za-kf-item {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            font-size: 0.92rem !important;
+            color: #1e293b !important;
+            font-weight: 500 !important;
+        }
+        .za-cta-btn {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 10px !important;
+            width: 100% !important;
+            height: 50px !important;
+            border-radius: 6px !important;
+            font-family: var(--za-font-heading) !important;
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            border: none !important;
+            cursor: pointer !important;
+        }
+        .za-cta-email {
+            background-color: #2c3038 !important;
+            color: #ffffff !important;
+        }
+        .za-cta-whatsapp {
+            background-color: #25D366 !important;
+            color: #ffffff !important;
+        }
+        .za-trust-badges-strip {
+            background-color: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            padding: 14px 18px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 12px !important;
+            margin-top: 20px !important;
+        }
+        @media (max-width: 991px) {
+            .za-single-product-grid {
+                grid-template-columns: 1fr !important;
+                gap: 36px !important;
             }
         }
     ";

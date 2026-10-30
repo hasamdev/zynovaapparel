@@ -187,6 +187,104 @@
       e.preventDefault();
       handleQuoteSubmit($(this));
     });
+
+    /* ======================================================================
+       5. SINGLE PRODUCT PAGE INTERACTIONS (SCREENSHOT ALIGNED)
+       ====================================================================== */
+    // Gallery Thumbnail Click
+    $(document).on('click', '.za-thumb-btn', function (e) {
+      e.preventDefault();
+      $('.za-thumb-btn').removeClass('is-active');
+      $(this).addClass('is-active');
+
+      var fullUrl = $(this).data('full-url');
+      if (fullUrl && $('#za-active-product-img').length) {
+        $('#za-active-product-img').attr('src', fullUrl);
+      }
+    });
+
+    // Style Variant Dropdown Sync with Gallery
+    $('#za_select_style').on('change', function () {
+      var selectedImg = $(this).find('option:selected').data('img');
+      if (selectedImg && $('#za-active-product-img').length) {
+        $('#za-active-product-img').attr('src', selectedImg);
+        // Also highlight matching thumbnail if found
+        $('.za-thumb-btn').removeClass('is-active').filter(function () {
+          return $(this).data('full-url') === selectedImg;
+        }).addClass('is-active');
+      }
+    });
+
+    // Product Detail Tabs Switcher
+    $(document).on('click', '.za-tab-nav-btn', function (e) {
+      e.preventDefault();
+      var targetTab = $(this).data('tab');
+
+      $('.za-tab-nav-btn').removeClass('is-active').attr('aria-selected', 'false');
+      $(this).addClass('is-active').attr('aria-selected', 'true');
+
+      $('.za-tab-panel').removeClass('is-active');
+      $('#' + targetTab).addClass('is-active');
+    });
+
+    // Write a Review link opens review tab
+    $('#za-trigger-review-tab').on('click', function (e) {
+      e.preventDefault();
+      $('.za-tab-nav-btn[data-tab="tab-reviews"]').trigger('click');
+      $('html, body').animate({
+        scrollTop: $('.za-product-tabs-section').offset().top - 90
+      }, 500);
+    });
+
+    // GET PRICE ON EMAIL - Open Quote Modal with Pre-filled Details
+    $('#za-btn-get-email').on('click', function (e) {
+      e.preventDefault();
+      var prodTitle = $(this).data('product-title') || $('h1.za-p-title').text();
+      var material = $('#za_select_material').val() || 'Standard Spec';
+      var style = $('#za_select_style').val() || '';
+      var size = $('#za_select_size').val() || 'Standard Size';
+
+      var details = 'Inquiry for Product: ' + prodTitle + '\n' +
+        'Selected Options:\n' +
+        (material ? '- Material/Leather: ' + material + '\n' : '') +
+        (style ? '- Style Variant: ' + style + '\n' : '') +
+        (size ? '- Size: ' + size + '\n' : '') +
+        'Product URL: ' + window.location.href + '\n\n' +
+        'Please provide factory wholesale pricing, turnaround time, and MOQ requirements.';
+
+      $('#za_quote_message').val(details);
+
+      // Preselect category if available
+      var firstCat = $('.za-p-breadcrumbs a').eq(1).text();
+      if (firstCat && $('#za_quote_category').length) {
+        $('#za_quote_category').val(firstCat);
+      }
+
+      $modal.addClass('is-open').attr('aria-hidden', 'false');
+      $('body').addClass('za-modal-locked');
+    });
+
+    // GET PRICE ON WHATSAPP - Direct WhatsApp Chat
+    $('#za-btn-get-whatsapp').on('click', function (e) {
+      e.preventDefault();
+      var prodTitle = $(this).data('product-title') || $('h1.za-p-title').text();
+      var phone = $(this).data('phone') || '923001234567';
+      var material = $('#za_select_material').val() || '';
+      var style = $('#za_select_style').val() || '';
+      var size = $('#za_select_size').val() || '';
+
+      var msg = 'Hello Zynova Apparel,\nI would like to get factory price quotation for:\n' +
+        '*' + prodTitle + '*\n' +
+        (material ? '• Material: ' + material + '\n' : '') +
+        (style ? '• Style: ' + style + '\n' : '') +
+        (size ? '• Size: ' + size + '\n' : '') +
+        'Link: ' + window.location.href + '\n\n' +
+        'Please share wholesale pricing and order details.';
+
+      var waUrl = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
+      window.open(waUrl, '_blank');
+    });
   });
 })(jQuery);
+
 
