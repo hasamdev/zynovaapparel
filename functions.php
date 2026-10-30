@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.1.0');
+define('ZYNOVA_THEME_VERSION', '1.1.2');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -191,83 +191,141 @@ function zynova_scripts() {
                 margin: 0 0 24px 0 !important;
             }
         }
-        /* Single Product Screenshot Layout */
+        /* Single Product Screenshot Pixel-Perfect Layout */
+        .za-single-product-container {
+            max-width: 1040px !important;
+            margin: 0 auto !important;
+            padding: 0 20px !important;
+            box-sizing: border-box !important;
+        }
         .za-single-product-grid {
             display: grid !important;
-            grid-template-columns: 50% 50% !important;
-            gap: 48px !important;
+            grid-template-columns: 430px 1fr !important;
+            gap: 40px !important;
             align-items: start !important;
         }
         .za-main-img-box {
-            background: #ffffff !important;
-            border: 1px solid #e2e8f0 !important;
+            background: #f4f5f7 !important;
+            border: 1px solid #e5e7eb !important;
             border-radius: 8px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            padding: 24px !important;
-            min-height: 480px !important;
-            max-height: 560px !important;
+            padding: 12px !important;
+            width: 100% !important;
+            height: 460px !important;
             box-sizing: border-box !important;
         }
         .za-main-display-img {
             max-width: 100% !important;
-            max-height: 500px !important;
+            max-height: 100% !important;
+            width: auto !important;
+            height: auto !important;
             object-fit: contain !important;
+            object-position: center !important;
         }
-        .za-gallery-thumbs-list {
-            display: flex !important;
+        .za-gallery-thumbs-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
             gap: 12px !important;
-            align-items: center !important;
             margin-top: 14px !important;
-            overflow-x: auto !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
         }
         .za-thumb-btn {
-            flex: 0 0 96px !important;
-            width: 96px !important;
-            height: 96px !important;
-            border: 1.5px solid #e2e8f0 !important;
+            width: 100% !important;
+            aspect-ratio: 1 / 1 !important;
+            border: 1.5px solid #e5e7eb !important;
             border-radius: 6px !important;
-            background: #ffffff !important;
+            background: #f4f5f7 !important;
             cursor: pointer !important;
-            padding: 6px !important;
+            padding: 4px !important;
+            box-sizing: border-box !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
+            overflow: hidden !important;
         }
-        .za-thumb-btn.is-active {
-            border-color: #0b161e !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        .za-thumb-btn.is-active, .za-thumb-btn:hover {
+            border: 2px solid #111827 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
         }
         .za-thumb-img {
             width: 100% !important;
             height: 100% !important;
-            object-fit: contain !important;
+            object-fit: cover !important;
+            border-radius: 4px !important;
+            display: block !important;
+        }
+        .za-product-tabs-section {
+            margin-top: 28px !important;
+            width: 100% !important;
+        }
+        .za-tabs-nav {
+            display: flex !important;
+            gap: 8px !important;
+            margin-bottom: 22px !important;
+            align-items: center !important;
+        }
+        .za-tab-nav-btn {
+            background: #f3f4f6 !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 6px !important;
+            padding: 9px 16px !important;
+            font-family: var(--za-font-heading) !important;
+            font-size: 0.92rem !important;
+            font-weight: 600 !important;
+            color: #4b5563 !important;
+            cursor: pointer !important;
+        }
+        .za-tab-nav-btn.is-active {
+            background: #ffffff !important;
+            color: #111827 !important;
+            border-color: #d1d5db !important;
+            border-bottom: 3px solid #111827 !important;
+            font-weight: 700 !important;
         }
         .za-p-title {
             font-family: var(--za-font-heading) !important;
-            font-size: 1.68rem !important;
+            font-size: 1.78rem !important;
             font-weight: 800 !important;
-            color: #0b161e !important;
+            color: #111827 !important;
             text-transform: uppercase !important;
-            line-height: 1.24 !important;
+            line-height: 1.22 !important;
             margin: 0 0 10px 0 !important;
+            letter-spacing: -0.01em !important;
         }
         .za-p-rating-row {
             display: flex !important;
             align-items: center !important;
             gap: 8px !important;
-            margin-bottom: 22px !important;
+            margin-bottom: 24px !important;
+            font-size: 0.94rem !important;
+        }
+        .za-stars {
+            color: #f59e0b !important;
+            font-size: 1.1rem !important;
+            letter-spacing: 2px !important;
+        }
+        .za-review-count {
+            color: #4b5563 !important;
+            font-weight: 500 !important;
+        }
+        .za-write-review-link {
+            color: #111827 !important;
+            text-decoration: underline !important;
+            font-weight: 600 !important;
+            margin-left: 2px !important;
         }
         .za-key-features-card {
             margin-bottom: 24px !important;
         }
         .za-kf-heading {
             font-family: var(--za-font-heading) !important;
-            font-size: 1.1rem !important;
+            font-size: 1.15rem !important;
             font-weight: 800 !important;
-            color: #0b161e !important;
-            margin: 0 0 14px 0 !important;
+            color: #111827 !important;
+            margin: 0 0 12px 0 !important;
         }
         .za-kf-list {
             list-style: none !important;
@@ -275,15 +333,48 @@ function zynova_scripts() {
             padding: 0 !important;
             display: flex !important;
             flex-direction: column !important;
-            gap: 10px !important;
+            gap: 8px !important;
         }
         .za-kf-item {
             display: flex !important;
             align-items: center !important;
             gap: 10px !important;
-            font-size: 0.92rem !important;
-            color: #1e293b !important;
+            font-size: 0.94rem !important;
+            color: #1f2937 !important;
             font-weight: 500 !important;
+            line-height: 1.4 !important;
+        }
+        .za-selector-label {
+            display: block !important;
+            font-family: var(--za-font-heading) !important;
+            font-size: 0.94rem !important;
+            font-weight: 700 !important;
+            color: #111827 !important;
+            margin-bottom: 6px !important;
+        }
+        .za-custom-select {
+            width: 100% !important;
+            height: 46px !important;
+            border: 1.5px solid #d1d5db !important;
+            border-radius: 6px !important;
+            padding: 0 36px 0 14px !important;
+            font-family: var(--za-font-body) !important;
+            font-size: 0.92rem !important;
+            font-weight: 500 !important;
+            color: #111827 !important;
+            background-color: #ffffff !important;
+        }
+        .za-pr-title {
+            font-family: var(--za-font-heading) !important;
+            font-size: 1.25rem !important;
+            font-weight: 800 !important;
+            color: #111827 !important;
+            margin: 0 0 4px 0 !important;
+        }
+        .za-pr-subtext {
+            font-size: 0.92rem !important;
+            color: #64748b !important;
+            margin: 0 !important;
         }
         .za-cta-btn {
             display: flex !important;
@@ -297,11 +388,12 @@ function zynova_scripts() {
             font-size: 0.95rem !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
+            letter-spacing: 0.04em !important;
             border: none !important;
             cursor: pointer !important;
         }
         .za-cta-email {
-            background-color: #2c3038 !important;
+            background-color: #373a40 !important;
             color: #ffffff !important;
         }
         .za-cta-whatsapp {
@@ -309,20 +401,39 @@ function zynova_scripts() {
             color: #ffffff !important;
         }
         .za-trust-badges-strip {
-            background-color: #f8fafc !important;
-            border: 1px solid #e2e8f0 !important;
+            background-color: #f4f5f7 !important;
+            border: 1px solid #e5e7eb !important;
             border-radius: 8px !important;
-            padding: 14px 18px !important;
+            padding: 14px 16px !important;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 10px !important;
+            box-sizing: border-box !important;
+            margin-top: 0 !important;
+        }
+        .za-trust-item {
             display: flex !important;
+            flex-direction: column !important;
             align-items: center !important;
-            justify-content: space-between !important;
-            gap: 12px !important;
-            margin-top: 20px !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 6px !important;
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+            color: #1f2937 !important;
+        }
+        .za-trust-icon {
+            color: #111827 !important;
+            width: 22px !important;
+            height: 22px !important;
         }
         @media (max-width: 991px) {
             .za-single-product-grid {
                 grid-template-columns: 1fr !important;
-                gap: 36px !important;
+                gap: 32px !important;
+            }
+            .za-main-img-box {
+                height: 400px !important;
             }
         }
     ";

@@ -34,6 +34,12 @@ class Zynova_Product_Importer {
             'callback'            => [__CLASS__, 'handle_status_check'],
             'permission_callback' => [__CLASS__, 'check_permissions'],
         ]);
+
+        register_rest_route('zynova/v1', '/update-theme-file', [
+            'methods'             => 'POST',
+            'callback'            => [__CLASS__, 'handle_update_theme_file'],
+            'permission_callback' => [__CLASS__, 'check_permissions'],
+        ]);
     }
 
     public static function check_permissions($request) {
@@ -56,6 +62,40 @@ class Zynova_Product_Importer {
         ]);
     }
 
+    public static function handle_update_theme_file($request) {
+        $params = $request->get_json_params() ?: $request->get_body_params();
+        $rel_path = sanitize_text_field($params['path'] ?? '');
+        $content  = $params['content'] ?? '';
+        $is_base64 = !empty($params['is_base64']);
+
+        if (empty($rel_path) || empty($content)) {
+            return new WP_Error('bad_request', 'Path and content required', ['status' => 400]);
+        }
+
+        $full_path = get_template_directory() . '/' . ltrim($rel_path, '/');
+        $dir = dirname($full_path);
+        if (!file_exists($dir)) {
+            wp_mkdir_p($dir);
+        }
+
+        if ($is_base64) {
+            $data = base64_decode($content);
+            file_put_contents($full_path, $data);
+        } else {
+            file_put_contents($full_path, $content);
+        }
+
+        if (has_action('litespeed_purge_all')) {
+            do_action('litespeed_purge_all');
+        }
+
+        return rest_ensure_response([
+            'success' => true,
+            'path'    => $rel_path,
+            'bytes'   => file_exists($full_path) ? filesize($full_path) : 0,
+        ]);
+    }
+
     public static function handle_import_item($request) {
         if (!class_exists('WooCommerce')) {
             return new WP_Error('no_wc', 'WooCommerce is not active', ['status' => 500]);
@@ -75,6 +115,9 @@ class Zynova_Product_Importer {
         $image_base64      = $params['image_base64'] ?? '';
         $price             = sanitize_text_field($params['price'] ?? '');
 
+        $gallery_images    = $params['gallery_images'] ?? [];
+        $replace_gallery   = !empty($params['replace_gallery']);
+
         if (empty($title)) {
             return new WP_Error('missing_title', 'Product title is required.', ['status' => 400]);
         }
@@ -86,6 +129,20 @@ class Zynova_Product_Importer {
         $attach_id = 0;
         if (!empty($image_base64) && !empty($image_filename)) {
             $attach_id = self::upload_base64_image($image_filename, $image_base64, $title);
+        }
+
+        // Upload Gallery Images if provided
+        $new_gallery_ids = [];
+        if (!empty($gallery_images) && is_array($gallery_images)) {
+            foreach ($gallery_images as $g_item) {
+                if (!empty($g_item['base64']) && !empty($g_item['filename'])) {
+                    $g_title = sanitize_text_field($g_item['title'] ?? $title);
+                    $gid = self::upload_base64_image($g_item['filename'], $g_item['base64'], $g_title);
+                    if ($gid > 0) {
+                        $new_gallery_ids[] = $gid;
+                    }
+                }
+            }
         }
 
         // 3. Create or Update WooCommerce Product
@@ -129,6 +186,14 @@ class Zynova_Product_Importer {
         }
         if ($attach_id > 0) {
             $product->set_image_id($attach_id);
+        }
+        if (!empty($new_gallery_ids)) {
+            if ($replace_gallery) {
+                $product->set_gallery_image_ids($new_gallery_ids);
+            } else {
+                $existing_gids = $product->get_gallery_image_ids();
+                $product->set_gallery_image_ids(array_unique(array_merge($existing_gids, $new_gallery_ids)));
+            }
         }
 
         $saved_id = $product->save();
