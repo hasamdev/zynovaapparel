@@ -302,11 +302,6 @@ function zynova_render_desktop_navigation() {
 
     echo '<ul class="za-nav-list" role="menubar">';
     foreach ($tree as $key => $item) {
-        // Exclude Accessories and Bags from the desktop navigation menu in header as requested
-        if (in_array($key, ['accessories', 'bags'], true)) {
-            continue;
-        }
-
         $has_mega = ($item['type'] === 'mega' && !empty($item['columns']));
         $is_active = (is_front_page() && $key === 'home') || ($item['url'] === $current_url);
         

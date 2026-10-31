@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.2.1');
+define('ZYNOVA_THEME_VERSION', '1.2.2');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -168,6 +168,17 @@ function zynova_scripts() {
             justify-content: center !important;
             height: 100% !important;
             white-space: nowrap !important;
+            padding: 0 10px !important;
+            font-size: 0.88rem !important;
+            gap: 4px !important;
+        }
+        .za-slider-dots {
+            display: none !important;
+        }
+        .za-cat-card {
+            width: 80% !important;
+            max-width: 80% !important;
+            margin: 0 auto !important;
         }
         .za-header-actions {
             display: flex !important;
@@ -271,7 +282,7 @@ function zynova_scripts() {
             transform: translate(-50%, -50%) rotate(-45deg) !important;
         }
         @media (max-width: 1260px) {
-            .za-nav-link { padding: 0 8px !important; font-size: 0.84rem !important; }
+            .za-nav-link { padding: 0 6px !important; font-size: 0.80rem !important; gap: 3px !important; }
         }
         @media (max-width: 992px) {
             .za-main-navigation { display: none !important; }
@@ -288,6 +299,7 @@ function zynova_scripts() {
             .za-btn-quote-text { display: none !important; }
             .za-btn-quote-short { display: inline !important; }
             .za-mobile-menu-trigger { width: 38px !important; height: 38px !important; }
+            .za-cat-card { flex: 0 0 60% !important; max-width: 232px !important; }
         }
         @media (max-width: 420px) {
             .za-header-container { padding: 0 10px !important; }

@@ -117,13 +117,6 @@ $categories_grid = [
             <button class="za-slider-arrow za-next" id="za-slide-next" aria-label="Next Slide">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
-
-            <!-- Slider Dots -->
-            <div class="za-slider-dots" id="za-slider-dots" role="tablist">
-                <?php foreach ($slider_slides as $i => $s) : ?>
-                    <button class="za-slider-dot <?php echo $i === 0 ? 'is-active' : ''; ?>" data-slide="<?php echo esc_attr($i); ?>" role="tab" aria-label="Slide <?php echo esc_attr($i + 1); ?>: <?php echo esc_attr($s['title']); ?>"></button>
-                <?php endforeach; ?>
-            </div>
         </div>
 
         <!-- TRUST BADGES BAR -->
