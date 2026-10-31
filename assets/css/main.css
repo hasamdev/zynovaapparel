@@ -3241,7 +3241,7 @@ flex-shrink: 0;
   height: 22px;
 }
 
-.za-trust-label {
+.za-trust-item span.za-trust-label {
   display: block;
   color: #000000 !important;
 }
