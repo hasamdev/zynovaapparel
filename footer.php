@@ -18,15 +18,8 @@ if (!defined('ABSPATH')) {
                 <!-- Column 1: Brand Info -->
                 <div class="za-footer-col za-footer-brand-col">
                     <div class="za-brand-wrap za-footer-brand">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="za-brand-link">
-                            <div class="za-logo-icon">
-                                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-logo-img">
-                            </div>
-                            <div class="za-brand-divider"></div>
-                            <div class="za-brand-text">
-                                <span class="za-brand-name">ZYNOVA APPAREL</span>
-                                <span class="za-brand-tagline">Premium Apparel & Performance Gear</span>
-                            </div>
+                        <a href="<?php echo esc_url(home_url('/')); ?>" class="za-brand-link" rel="home">
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-logo-img">
                         </a>
                     </div>
 
@@ -76,7 +69,7 @@ if (!defined('ABSPATH')) {
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo esc_url(home_url('/product-category/motorcycle-racing-gear/')); ?>">
+                            <a href="<?php echo esc_url(home_url('/product-category/motorcycling/')); ?>">
                                 <span>Motorcycling</span>
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </a>

@@ -30,14 +30,7 @@ if (!defined('ABSPATH')) {
             <!-- Brand Logo -->
             <div class="za-brand-wrap">
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="za-brand-link" rel="home">
-                    <div class="za-logo-icon">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-logo-img">
-                    </div>
-                    <div class="za-brand-divider"></div>
-                    <div class="za-brand-text">
-                        <span class="za-brand-name">ZYNOVA APPAREL</span>
-                        <span class="za-brand-tagline">Premium Apparel & Performance Gear</span>
-                    </div>
+                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-logo-img">
                 </a>
             </div>
 
@@ -70,9 +63,9 @@ if (!defined('ABSPATH')) {
         <!-- Mobile Navigation Drawer -->
         <div id="mobile-navigation" class="za-mobile-drawer" aria-hidden="true">
             <div class="za-mobile-drawer-header">
-                <div class="za-brand-text">
-                    <span class="za-brand-name">ZYNOVA APPAREL</span>
-                </div>
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="za-brand-link" rel="home">
+                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-logo-img">
+                </a>
                 <button type="button" class="za-mobile-drawer-close" aria-label="Close menu">&times;</button>
             </div>
             <div class="za-mobile-drawer-body">
