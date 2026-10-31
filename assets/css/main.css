@@ -286,6 +286,10 @@ body.admin-bar .za-site-header {
   flex-shrink: 0;
 }
 
+.za-nav-item.is-extra-hidden {
+  display: none !important;
+}
+
 .za-nav-link {
   display: inline-flex;
   align-items: center;
@@ -620,6 +624,24 @@ body.admin-bar .za-site-header {
   padding: 20px 24px;
 }
 
+.za-drawer-adaptive-banner {
+  padding: 10px 14px;
+  margin: 0 0 16px 0;
+  background: rgba(200, 155, 60, 0.12);
+  border-left: 3px solid var(--za-accent-gold);
+  border-radius: 4px;
+}
+
+.za-drawer-adaptive-badge {
+  font-family: var(--za-font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--za-accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+}
+
 .za-mobile-nav-list {
   list-style: none;
   margin: 0;
@@ -628,6 +650,17 @@ body.admin-bar .za-site-header {
 
 .za-mobile-nav-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all var(--za-transition-fast);
+}
+
+.za-mobile-nav-item.is-priority-extra {
+  background: rgba(200, 155, 60, 0.07);
+  border-left: 3px solid var(--za-accent-gold);
+  padding-left: 10px;
+}
+
+.za-mobile-nav-item.is-priority-dimmed {
+  opacity: 0.8;
 }
 
 .za-mobile-item-row {
