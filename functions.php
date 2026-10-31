@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.2.0');
+define('ZYNOVA_THEME_VERSION', '1.2.1');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -926,10 +926,11 @@ function zynova_scripts() {
         }
         .za-footer-strip {
             display: flex !important;
+            flex-direction: row !important;
             align-items: center !important;
             justify-content: space-between !important;
             flex-wrap: wrap !important;
-            gap: 16px !important;
+            gap: 20px !important;
             padding: 16px 28px !important;
             background-color: rgba(255, 255, 255, 0.025) !important;
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -939,6 +940,61 @@ function zynova_scripts() {
             margin: 36px 0 24px 0 !important;
             width: 100% !important;
             box-sizing: border-box !important;
+        }
+        .za-strip-contact {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            gap: 16px !important;
+        }
+        .za-strip-item {
+            display: inline-flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 8px !important;
+            white-space: nowrap !important;
+        }
+        .za-strip-item svg {
+            color: #c89b3c !important;
+            flex-shrink: 0 !important;
+            width: 16px !important;
+            height: 16px !important;
+        }
+        .za-strip-item span,
+        .za-strip-item a {
+            color: #94a3b8 !important;
+            font-size: 0.88rem !important;
+            text-decoration: none !important;
+            transition: color 0.2s ease !important;
+        }
+        .za-strip-item a:hover {
+            color: #c89b3c !important;
+        }
+        .za-strip-divider {
+            display: inline-block !important;
+            width: 1px !important;
+            height: 16px !important;
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            flex-shrink: 0 !important;
+        }
+        .za-strip-values {
+            display: inline-flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 10px !important;
+            color: #cbd5e1 !important;
+            font-weight: 500 !important;
+            white-space: nowrap !important;
+        }
+        .za-strip-values svg {
+            color: #c89b3c !important;
+            flex-shrink: 0 !important;
+            width: 16px !important;
+            height: 16px !important;
+        }
+        .za-dot {
+            color: rgba(255, 255, 255, 0.25) !important;
         }
         @media (max-width: 992px) {
             .za-footer-main {
@@ -981,31 +1037,48 @@ function zynova_scripts() {
                 padding: 3px 0 !important;
             }
             .za-footer-strip {
+                display: flex !important;
                 flex-direction: column !important;
-                align-items: stretch !important;
+                align-items: center !important;
+                justify-content: center !important;
                 text-align: center !important;
                 gap: 14px !important;
                 padding: 16px 18px !important;
-                margin: 20px 0 16px 0 !important;
+                margin: 24px 0 16px 0 !important;
             }
             .za-strip-contact {
-                flex-direction: column !important;
+                display: flex !important;
+                flex-direction: row !important;
                 align-items: center !important;
-                gap: 10px !important;
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+                gap: 8px 16px !important;
                 width: 100% !important;
             }
             .za-strip-item {
+                display: inline-flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
                 justify-content: center !important;
-                font-size: 0.84rem !important;
+                font-size: 0.82rem !important;
+                white-space: nowrap !important;
             }
             .za-strip-divider {
-                display: none !important;
+                display: inline-block !important;
+                width: 1px !important;
+                height: 14px !important;
+                background-color: rgba(255, 255, 255, 0.2) !important;
+                flex-shrink: 0 !important;
             }
             .za-strip-values {
+                display: inline-flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
                 justify-content: center !important;
                 font-size: 0.82rem !important;
                 gap: 8px !important;
                 flex-wrap: wrap !important;
+                width: 100% !important;
             }
             .za-footer-bottom {
                 padding: 12px 0 24px 0 !important;
@@ -1037,12 +1110,38 @@ function zynova_scripts() {
                 height: 12px !important;
                 margin-left: 4px !important;
             }
+            .za-strip-contact {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+                gap: 6px 12px !important;
+            }
             .za-strip-item {
-                font-size: 0.8rem !important;
+                display: inline-flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                font-size: 0.78rem !important;
+                gap: 5px !important;
+                white-space: nowrap !important;
+            }
+            .za-strip-divider {
+                display: inline-block !important;
+                width: 1px !important;
+                height: 12px !important;
+                background-color: rgba(255, 255, 255, 0.2) !important;
+                flex-shrink: 0 !important;
             }
             .za-strip-values {
-                font-size: 0.78rem !important;
+                display: inline-flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: center !important;
+                font-size: 0.76rem !important;
                 gap: 6px !important;
+                flex-wrap: wrap !important;
+                width: 100% !important;
             }
         }
         @media (max-width: 360px) {
