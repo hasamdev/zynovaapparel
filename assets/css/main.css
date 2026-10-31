@@ -3243,6 +3243,7 @@ flex-shrink: 0;
 
 .za-trust-label {
   display: block;
+  color: #000000;
 }
 
 /* Product Image Lightbox Modal */
