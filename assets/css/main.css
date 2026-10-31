@@ -279,7 +279,8 @@ body.admin-bar .za-site-header {
 }
 
 .za-nav-item {
-  position: static; /* Important for full-width/container mega menus */
+  position: static;
+  /* Important for full-width/container mega menus */
   height: 100%;
   display: flex;
   align-items: center;
@@ -304,30 +305,22 @@ body.admin-bar .za-site-header {
   transition: color var(--za-transition-fast);
   white-space: nowrap;
 }
-  height: 100%;
-  color: #cbd5e1;
-  font-size: 0.92rem;
-  font-weight: 500;
-  position: relative;
-  transition: color var(--za-transition-fast);
-  white-space: nowrap;
-}
 
 .za-chevron-down {
   transition: transform var(--za-transition-fast);
 }
 
-.za-nav-item:hover > .za-nav-link,
-.za-nav-item.is-active > .za-nav-link {
+.za-nav-item:hover>.za-nav-link,
+.za-nav-item.is-active>.za-nav-link {
   color: var(--za-accent-gold);
 }
 
-.za-nav-item:hover > .za-nav-link .za-chevron-down {
+.za-nav-item:hover>.za-nav-link .za-chevron-down {
   transform: rotate(180deg);
 }
 
-.za-nav-item.is-active > .za-nav-link::after,
-.za-nav-item:hover > .za-nav-link::after {
+.za-nav-item.is-active>.za-nav-link::after,
+.za-nav-item:hover>.za-nav-link::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -358,7 +351,7 @@ body.admin-bar .za-site-header {
   border: 1px solid #e2e8f0;
 }
 
-.za-nav-item:hover > .za-mega-dropdown {
+.za-nav-item:hover>.za-mega-dropdown {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -782,6 +775,7 @@ body.admin-bar .za-site-header {
   from {
     opacity: 0.3;
   }
+
   to {
     opacity: 1;
   }
@@ -829,8 +823,13 @@ body.admin-bar .za-site-header {
   transform: translateY(-50%) scale(1.08);
 }
 
-.za-slider-arrow.za-prev { left: 24px; }
-.za-slider-arrow.za-next { right: 24px; }
+.za-slider-arrow.za-prev {
+  left: 24px;
+}
+
+.za-slider-arrow.za-next {
+  right: 24px;
+}
 
 .za-slider-dots {
   position: absolute;
@@ -1922,8 +1921,13 @@ body.admin-bar .za-site-header {
     height: 14px !important;
   }
 
-  .za-slider-arrow.za-prev { left: 8px !important; }
-  .za-slider-arrow.za-next { right: 8px !important; }
+  .za-slider-arrow.za-prev {
+    left: 8px !important;
+  }
+
+  .za-slider-arrow.za-next {
+    right: 8px !important;
+  }
 
   .za-slider-dots {
     bottom: 10px !important;
@@ -2906,5 +2910,3 @@ body.za-lightbox-locked {
     height: 320px;
   }
 }
-
-
