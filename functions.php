@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.1.9');
+define('ZYNOVA_THEME_VERSION', '1.2.0');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -117,13 +117,13 @@ function zynova_scripts() {
             box-sizing: border-box !important;
             width: 100% !important;
         }
-        .za-brand-wrap {
+        .za-site-header .za-brand-wrap {
             display: flex !important;
             align-items: center !important;
             height: 100% !important;
             flex-shrink: 0 !important;
         }
-        .za-brand-link {
+        .za-site-header .za-brand-link {
             display: inline-flex !important;
             align-items: center !important;
             height: 100% !important;
@@ -806,26 +806,103 @@ function zynova_scripts() {
         }
         .za-footer-main {
             display: grid !important;
-            grid-template-columns: 1.4fr 1fr 1fr !important;
-            gap: 40px !important;
-            padding-bottom: 32px !important;
+            grid-template-columns: minmax(320px, 420px) 220px 200px !important;
+            justify-content: space-between !important;
+            align-items: start !important;
+            gap: 48px !important;
+            padding-bottom: 36px !important;
             width: 100% !important;
             box-sizing: border-box !important;
         }
         .za-footer-brand-col {
-            max-width: 100% !important;
+            max-width: 420px !important;
         }
-        .za-footer-brand .za-brand-link {
+        .za-footer-brand {
+            display: block !important;
+            height: auto !important;
+            margin: 0 0 18px 0 !important;
+            padding: 0 !important;
+        }
+        .za-footer-brand-link {
+            display: inline-block !important;
+            height: auto !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+        }
+        .za-footer-logo-img {
+            height: 52px !important;
+            width: auto !important;
+            max-width: 175px !important;
+            object-fit: contain !important;
+            display: block !important;
+            filter: drop-shadow(0 0 1px #ffffff) drop-shadow(0 0 3px rgba(200, 155, 60, 0.45)) !important;
+            transition: transform 0.2s ease !important;
+        }
+        .za-footer-brand-link:hover .za-footer-logo-img {
+            transform: scale(1.03) !important;
+        }
+        .za-footer-desc {
+            font-size: 0.92rem !important;
+            color: #94a3b8 !important;
+            line-height: 1.6 !important;
+            margin: 0 0 20px 0 !important;
+            padding: 0 !important;
+            max-width: 360px !important;
+        }
+        .za-social-links {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .za-social-icon {
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(200, 155, 60, 0.35) !important;
             display: inline-flex !important;
             align-items: center !important;
-            margin-bottom: 16px !important;
+            justify-content: center !important;
+            color: var(--za-accent-gold) !important;
+            transition: all 0.2s ease !important;
+            text-decoration: none !important;
+            flex-shrink: 0 !important;
         }
-        .za-footer-brand .za-logo-img {
-            height: 48px !important;
-            width: auto !important;
-            max-width: 170px !important;
-            object-fit: contain !important;
-            filter: drop-shadow(0 0 1px #ffffff) drop-shadow(0 0 3px rgba(200, 155, 60, 0.45)) !important;
+        .za-social-icon:hover {
+            background: var(--za-accent-gold) !important;
+            color: #07111a !important;
+            border-color: var(--za-accent-gold) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(200, 155, 60, 0.35) !important;
+        }
+        .za-footer-col:not(.za-footer-brand-col) {
+            width: 100% !important;
+            max-width: 220px !important;
+        }
+        .za-footer-col-title {
+            font-family: inherit !important;
+            font-size: 1.15rem !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            margin: 0 0 6px 0 !important;
+        }
+        .za-footer-col-bar {
+            display: block !important;
+            width: 32px !important;
+            height: 2px !important;
+            background-color: #c89b3c !important;
+            border-radius: 2px !important;
+            margin: 0 0 16px 0 !important;
+        }
+        .za-footer-links {
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .za-footer-links li {
+            margin-bottom: 9px !important;
         }
         .za-footer-links a {
             display: flex !important;
@@ -833,14 +910,19 @@ function zynova_scripts() {
             justify-content: space-between !important;
             width: 100% !important;
             max-width: 100% !important;
-            padding: 4px 0 !important;
+            padding: 3px 0 !important;
             font-size: 0.92rem !important;
             color: #94a3b8 !important;
             text-decoration: none !important;
+            transition: all 0.2s ease !important;
         }
         .za-footer-links a svg {
             flex-shrink: 0 !important;
-            margin-left: 8px !important;
+            margin-left: 12px !important;
+        }
+        .za-footer-links a:hover {
+            color: #c89b3c !important;
+            transform: translateX(3px) !important;
         }
         .za-footer-strip {
             display: flex !important;
@@ -848,47 +930,125 @@ function zynova_scripts() {
             justify-content: space-between !important;
             flex-wrap: wrap !important;
             gap: 16px !important;
-            padding: 16px 24px !important;
+            padding: 16px 28px !important;
+            background-color: rgba(255, 255, 255, 0.025) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 8px !important;
+            font-size: 0.88rem !important;
+            color: #94a3b8 !important;
+            margin: 36px 0 24px 0 !important;
             width: 100% !important;
             box-sizing: border-box !important;
         }
         @media (max-width: 992px) {
             .za-footer-main {
                 grid-template-columns: 1fr 1fr !important;
-                gap: 28px !important;
+                justify-content: start !important;
+                gap: 32px 24px !important;
             }
             .za-footer-brand-col {
                 grid-column: 1 / -1 !important;
+                max-width: 100% !important;
+            }
+            .za-footer-desc {
+                max-width: 520px !important;
             }
         }
         @media (max-width: 768px) {
+            .za-site-footer {
+                padding-top: 36px !important;
+            }
+            .za-footer-main {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 28px 20px !important;
+                padding-bottom: 24px !important;
+            }
+            .za-footer-logo-img {
+                height: 44px !important;
+                max-width: 150px !important;
+            }
+            .za-footer-desc {
+                font-size: 0.88rem !important;
+                line-height: 1.55 !important;
+                margin-bottom: 16px !important;
+                max-width: 100% !important;
+            }
+            .za-footer-col:not(.za-footer-brand-col) {
+                max-width: 100% !important;
+            }
+            .za-footer-links a {
+                font-size: 0.86rem !important;
+                padding: 3px 0 !important;
+            }
             .za-footer-strip {
                 flex-direction: column !important;
                 align-items: stretch !important;
                 text-align: center !important;
-                gap: 12px !important;
-                padding: 14px 16px !important;
+                gap: 14px !important;
+                padding: 16px 18px !important;
+                margin: 20px 0 16px 0 !important;
             }
             .za-strip-contact {
                 flex-direction: column !important;
-                gap: 8px !important;
+                align-items: center !important;
+                gap: 10px !important;
                 width: 100% !important;
             }
             .za-strip-item {
                 justify-content: center !important;
+                font-size: 0.84rem !important;
             }
             .za-strip-divider {
                 display: none !important;
             }
             .za-strip-values {
                 justify-content: center !important;
+                font-size: 0.82rem !important;
                 gap: 8px !important;
+                flex-wrap: wrap !important;
+            }
+            .za-footer-bottom {
+                padding: 12px 0 24px 0 !important;
+                font-size: 0.82rem !important;
             }
         }
-        @media (max-width: 540px) {
+        @media (max-width: 480px) {
+            .za-footer-main {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 24px 14px !important;
+            }
+            .za-footer-logo-img {
+                height: 38px !important;
+                max-width: 130px !important;
+            }
+            .za-footer-col-title {
+                font-size: 0.98rem !important;
+            }
+            .za-footer-col-bar {
+                width: 24px !important;
+                margin-bottom: 10px !important;
+            }
+            .za-footer-links a {
+                font-size: 0.82rem !important;
+                gap: 4px !important;
+            }
+            .za-footer-links a svg {
+                width: 12px !important;
+                height: 12px !important;
+                margin-left: 4px !important;
+            }
+            .za-strip-item {
+                font-size: 0.8rem !important;
+            }
+            .za-strip-values {
+                font-size: 0.78rem !important;
+                gap: 6px !important;
+            }
+        }
+        @media (max-width: 360px) {
             .za-footer-main {
                 grid-template-columns: 1fr !important;
-                gap: 24px !important;
+                gap: 22px !important;
             }
         }
 

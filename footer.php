@@ -17,9 +17,9 @@ if (!defined('ABSPATH')) {
             <div class="za-footer-main">
                 <!-- Column 1: Brand Info -->
                 <div class="za-footer-col za-footer-brand-col">
-                    <div class="za-brand-wrap za-footer-brand">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="za-brand-link" rel="home">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-logo-img">
+                    <div class="za-footer-brand">
+                        <a href="<?php echo esc_url(home_url('/')); ?>" class="za-footer-brand-link" rel="home">
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-footer-logo-img">
                         </a>
                     </div>
 
