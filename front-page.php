@@ -26,37 +26,61 @@ $get_cat_url = function($slug) {
     return home_url('/product-category/' . sanitize_title($slug) . '/');
 };
 
-// Direct Slider banners mapping to relative category/page links
+// Direct Slider banners mapping to relative category/page links with original resolutions and high-DPI support
 $slider_slides = [
     [
-        'title' => 'Motorcycle & Racing Gear',
-        'url'   => $get_cat_url('motorcycle-racing-gear'),
-        'image' => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear.jpg',
+        'title'   => 'Motorcycle & Racing Gear',
+        'url'     => $get_cat_url('motorcycle-racing-gear'),
+        'image'   => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear.jpg',
+        'webp'    => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear.webp',
+        'webp_2x' => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear-2x.webp',
+        'width'   => 1600,
+        'height'  => 676,
     ],
     [
-        'title' => 'Sportswear',
-        'url'   => $get_cat_url('sportswear'),
-        'image' => $theme_uri . '/assets/images/sliders/sportswear.jpg',
+        'title'   => 'Sportswear',
+        'url'     => $get_cat_url('sportswear'),
+        'image'   => $theme_uri . '/assets/images/sliders/sportswear.jpg',
+        'webp'    => $theme_uri . '/assets/images/sliders/sportswear.webp',
+        'webp_2x' => $theme_uri . '/assets/images/sliders/sportswear-2x.webp',
+        'width'   => 1600,
+        'height'  => 685,
     ],
     [
-        'title' => 'Fashion Wear',
-        'url'   => $get_cat_url('fashion-wear'),
-        'image' => $theme_uri . '/assets/images/sliders/fashion-wear.jpg',
+        'title'   => 'Fashion Wear',
+        'url'     => $get_cat_url('fashion-wear'),
+        'image'   => $theme_uri . '/assets/images/sliders/fashion-wear.jpg',
+        'webp'    => $theme_uri . '/assets/images/sliders/fashion-wear.webp',
+        'webp_2x' => $theme_uri . '/assets/images/sliders/fashion-wear-2x.webp',
+        'width'   => 2096,
+        'height'  => 1184,
     ],
     [
-        'title' => 'Workwear & Safety Gear',
-        'url'   => $get_cat_url('workwear-safety-gear'),
-        'image' => $theme_uri . '/assets/images/sliders/workwear-safety.jpg',
+        'title'   => 'Workwear & Safety Gear',
+        'url'     => $get_cat_url('workwear-safety-gear'),
+        'image'   => $theme_uri . '/assets/images/sliders/workwear-safety.jpg',
+        'webp'    => $theme_uri . '/assets/images/sliders/workwear-safety.webp',
+        'webp_2x' => $theme_uri . '/assets/images/sliders/workwear-safety-2x.webp',
+        'width'   => 1600,
+        'height'  => 685,
     ],
     [
-        'title' => 'Bags & Travel Gear',
-        'url'   => $get_cat_url('bags'),
-        'image' => $theme_uri . '/assets/images/sliders/bags.jpg',
+        'title'   => 'Bags & Travel Gear',
+        'url'     => $get_cat_url('bags'),
+        'image'   => $theme_uri . '/assets/images/sliders/bags.jpg',
+        'webp'    => $theme_uri . '/assets/images/sliders/bags.webp',
+        'webp_2x' => $theme_uri . '/assets/images/sliders/bags-2x.webp',
+        'width'   => 1600,
+        'height'  => 685,
     ],
     [
-        'title' => 'Accessories',
-        'url'   => $get_cat_url('accessories'),
-        'image' => $theme_uri . '/assets/images/sliders/accessories.jpg',
+        'title'   => 'Accessories',
+        'url'     => $get_cat_url('accessories'),
+        'image'   => $theme_uri . '/assets/images/sliders/accessories.jpg',
+        'webp'    => $theme_uri . '/assets/images/sliders/accessories.webp',
+        'webp_2x' => $theme_uri . '/assets/images/sliders/accessories-2x.webp',
+        'width'   => 2352,
+        'height'  => 1008,
     ],
 ];
 
@@ -104,7 +128,10 @@ $categories_grid = [
                 <?php foreach ($slider_slides as $index => $slide) : ?>
                     <div class="za-slide <?php echo $index === 0 ? 'is-active' : ''; ?>">
                         <a href="<?php echo esc_url($slide['url']); ?>" class="za-slide-direct-link" aria-label="<?php echo esc_attr($slide['title']); ?>">
-                            <img src="<?php echo esc_url($slide['image']); ?>" alt="<?php echo esc_attr($slide['title']); ?>" class="za-slide-direct-img" <?php echo $index === 0 ? 'loading="eager"' : 'loading="lazy"'; ?>>
+                            <picture>
+                                <source type="image/webp" srcset="<?php echo esc_url($slide['webp']); ?> 1x, <?php echo esc_url($slide['webp_2x']); ?> 2x">
+                                <img src="<?php echo esc_url($slide['image']); ?>" alt="<?php echo esc_attr($slide['title']); ?>" width="<?php echo esc_attr($slide['width']); ?>" height="<?php echo esc_attr($slide['height']); ?>" class="za-slide-direct-img" <?php echo $index === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'; ?> decoding="async">
+                            </picture>
                         </a>
                     </div>
                 <?php endforeach; ?>
