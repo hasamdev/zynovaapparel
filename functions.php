@@ -175,6 +175,9 @@ function zynova_scripts() {
         .za-slider-dots {
             display: none !important;
         }
+        .za-trust-item span.za-trust-label {
+            color: #000000 !important;
+        }
         .za-header-actions {
             display: flex !important;
             align-items: center !important;
