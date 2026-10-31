@@ -175,11 +175,6 @@ function zynova_scripts() {
         .za-slider-dots {
             display: none !important;
         }
-        .za-cat-card {
-            width: 80% !important;
-            max-width: 80% !important;
-            margin: 0 auto !important;
-        }
         .za-header-actions {
             display: flex !important;
             align-items: center !important;
