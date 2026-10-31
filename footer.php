@@ -19,7 +19,9 @@ if (!defined('ABSPATH')) {
                 <div class="za-footer-col za-footer-brand-col">
                     <div class="za-brand-wrap za-footer-brand">
                         <a href="<?php echo esc_url(home_url('/')); ?>" class="za-brand-link">
-                            <div class="za-logo-icon">ZA</div>
+                            <div class="za-logo-icon">
+                                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Zynova Apparel" class="za-logo-img">
+                            </div>
                             <div class="za-brand-divider"></div>
                             <div class="za-brand-text">
                                 <span class="za-brand-name">ZYNOVA APPAREL</span>

@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.1.7');
+define('ZYNOVA_THEME_VERSION', '1.1.8');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -131,12 +131,23 @@ function zynova_scripts() {
             text-decoration: none !important;
         }
         .za-logo-icon {
+            width: 52px !important;
+            height: 44px !important;
+            background-color: #ffffff !important;
+            border-radius: 8px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            line-height: 1 !important;
+            padding: 3px 5px !important;
             box-sizing: border-box !important;
             flex-shrink: 0 !important;
+            border: 1.5px solid rgba(200, 155, 60, 0.45) !important;
+        }
+        .za-logo-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            display: block !important;
         }
         .za-main-navigation {
             display: flex !important;
@@ -237,7 +248,7 @@ function zynova_scripts() {
             .za-header-container { height: 64px !important; padding: 0 14px !important; }
             .za-brand-divider, .za-brand-tagline { display: none !important; }
             .za-brand-link { gap: 8px !important; }
-            .za-logo-icon { width: 36px !important; height: 36px !important; font-size: 1.05rem !important; border-radius: 6px !important; }
+            .za-logo-icon { width: 44px !important; height: 38px !important; padding: 2px 4px !important; border-radius: 6px !important; }
             .za-brand-name { font-size: 1.05rem !important; letter-spacing: 0.04em !important; }
             .za-header-actions { gap: 8px !important; }
             .za-header-cart-btn { width: 36px !important; height: 36px !important; }
@@ -249,7 +260,7 @@ function zynova_scripts() {
         @media (max-width: 420px) {
             .za-header-container { padding: 0 10px !important; }
             .za-header-actions { gap: 6px !important; }
-            .za-logo-icon { width: 32px !important; height: 32px !important; font-size: 0.95rem !important; border-radius: 5px !important; }
+            .za-logo-icon { width: 38px !important; height: 34px !important; padding: 2px 3px !important; border-radius: 5px !important; }
             .za-brand-name { font-size: 0.95rem !important; letter-spacing: 0.02em !important; }
             .za-header-cart-btn { width: 34px !important; height: 34px !important; }
             .za-btn-quote { height: 34px !important; padding: 0 9px !important; font-size: 0.76rem !important; gap: 4px !important; }

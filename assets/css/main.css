@@ -209,21 +209,25 @@ body.admin-bar .za-site-header {
 }
 
 .za-logo-icon {
-  width: 44px;
+  width: 52px;
   height: 44px;
-  border: 2px solid var(--za-white);
+  background-color: #ffffff;
   border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--za-font-heading);
-  font-weight: 900;
-  font-size: 1.35rem;
-  color: var(--za-white);
-  letter-spacing: 0.05em;
-  line-height: 1;
+  padding: 3px 5px;
   box-sizing: border-box;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid rgba(200, 155, 60, 0.45);
+}
+
+.za-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .za-brand-divider {
@@ -1706,15 +1710,294 @@ body.admin-bar .za-site-header {
 }
 
 /* ==========================================================================
-   11. WOOCOMMERCE ESSENTIAL STYLES
+   11. WOOCOMMERCE ARCHIVE & SHOP SIDEBAR (Strictly matching ioniasports.com)
    ========================================================================== */
-.za-woocommerce-content ul.products {
+.za-shop-container {
+  padding-top: 24px;
+  padding-bottom: 70px;
+}
+
+.za-shop-layout {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  list-style: none;
+  grid-template-columns: 280px 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+/* Sidebar Box */
+.za-shop-sidebar {
+  background: #ffffff;
+  border: 1px solid var(--za-gray-200);
+  border-radius: var(--za-radius-md);
+  padding: 26px 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.za-shop-widget {
+  margin-bottom: 34px;
+}
+
+.za-shop-widget:last-child {
+  margin-bottom: 0;
+}
+
+.za-widget-title {
+  font-family: var(--za-font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--za-gray-900);
+  margin: 0 0 16px 0;
+  padding-bottom: 10px;
+  position: relative;
+  display: block;
+}
+
+.za-widget-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 36px;
+  height: 2.5px;
+  background-color: var(--za-accent-gold);
+  border-radius: 2px;
+}
+
+/* Product Categories Tree */
+.za-product-categories-tree,
+.za-children-list {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.za-cat-item {
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.za-cat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.za-cat-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #374151;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.za-cat-link:hover,
+.za-cat-item.is-current > .za-cat-row .za-cat-link {
+  color: var(--za-accent-gold);
+  font-weight: 700;
+  transform: translateX(3px);
+}
+
+.za-cat-count {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-left: 6px;
+  font-weight: normal;
+}
+
+.za-cat-toggle-btn {
+  background: none;
+  border: none;
+  padding: 4px 6px;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: transform 0.2s ease, color 0.2s ease;
+  line-height: 1;
+}
+
+.za-cat-toggle-btn:hover {
+  color: var(--za-accent-gold);
+}
+
+.za-cat-item.is-expanded > .za-cat-row .za-cat-toggle-btn {
+  transform: rotate(180deg);
+  color: var(--za-accent-gold);
+}
+
+.za-children-list {
+  display: none;
+  margin-left: 12px !important;
+  padding-left: 10px !important;
+  border-left: 1.5px solid #e2e8f0;
+  padding-top: 4px;
+  padding-bottom: 6px;
+}
+
+.za-cat-item.is-expanded > .za-children-list {
+  display: block;
+}
+
+.za-subcat-item {
+  margin-bottom: 4px;
+}
+
+.za-subcat-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #64748b;
+  font-size: 0.86rem;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: all 0.2s ease;
+}
+
+.za-subcat-link:hover,
+.za-subcat-item.is-current .za-subcat-link {
+  color: var(--za-accent-gold);
+  font-weight: 600;
+  transform: translateX(3px);
+}
+
+/* Top Rated Products Widget */
+.za-top-rated-products {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.za-top-product-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.za-top-product-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.za-top-product-img-link {
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--za-radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.za-top-product-img-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.za-top-product-card:hover .za-top-product-img-link img {
+  transform: scale(1.08);
+}
+
+.za-top-product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.za-top-product-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--za-gray-900);
   margin: 0;
-  padding: 0;
+  line-height: 1.35;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s ease;
+}
+
+.za-top-product-title:hover {
+  color: var(--za-accent-gold);
+}
+
+.za-top-product-stars {
+  color: #eab308;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.za-top-product-price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--za-accent-gold);
+}
+
+.za-price-request {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--za-accent-gold);
+  text-transform: uppercase;
+}
+
+/* Mobile Filter Toggle */
+.za-shop-filter-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 18px;
+  background: var(--za-primary);
+  color: var(--za-white);
+  border: 1.5px solid var(--za-accent-gold);
+  border-radius: var(--za-radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.za-shop-filter-toggle svg {
+  color: var(--za-accent-gold);
+}
+
+.za-shop-filter-toggle:hover {
+  background: var(--za-accent-gold);
+  color: var(--za-primary-dark);
+}
+
+.za-shop-filter-toggle:hover svg {
+  color: var(--za-primary-dark);
+}
+
+/* WooCommerce Products Grid in Shop */
+.za-shop-main .za-woocommerce-content ul.products {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 22px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .za-woocommerce-content ul.products li.product {
@@ -1837,9 +2120,9 @@ body.admin-bar .za-site-header {
   }
 
   .za-logo-icon {
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 1.05rem !important;
+    width: 44px !important;
+    height: 38px !important;
+    padding: 2px 4px !important;
     border-radius: 6px !important;
   }
 
@@ -2117,9 +2400,9 @@ body.admin-bar .za-site-header {
   }
 
   .za-logo-icon {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 0.95rem !important;
+    width: 38px !important;
+    height: 34px !important;
+    padding: 2px 3px !important;
     border-radius: 5px !important;
   }
 

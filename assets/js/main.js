@@ -476,6 +476,22 @@
 
     initMobileSnapSlider('#za-cat-grid', '#za-cat-slider-dots', '.za-cat-card');
     initMobileSnapSlider('#za-prod-grid', '#za-prod-slider-dots', '.za-product-card');
+
+    /* ======================================================================
+       7. SHOP ARCHIVE SIDEBAR INTERACTION
+       ====================================================================== */
+    // Category Tree Toggle in Sidebar
+    $(document).on('click', '.za-cat-toggle-btn', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var $parent = $(this).closest('.za-cat-item');
+      $parent.toggleClass('is-expanded');
+    });
+
+    // Mobile Shop Filter Toggle
+    $('#za-shop-filter-toggle').on('click', function () {
+      $('.za-shop-sidebar').slideToggle(250).toggleClass('is-open');
+    });
   });
 })(jQuery);
 
