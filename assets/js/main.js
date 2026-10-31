@@ -405,6 +405,77 @@
       var waUrl = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
       window.open(waUrl, '_blank');
     });
+
+    /* ======================================================================
+       6. MOBILE SNAP SLIDERS (Categories & Top Products)
+       ====================================================================== */
+    function initMobileSnapSlider(containerId, dotsId, cardSelector) {
+      var $container = $(containerId);
+      var $dotsContainer = $(dotsId);
+      if (!$container.length || !$dotsContainer.length) {
+        return;
+      }
+
+      var $cards = $container.find(cardSelector);
+      if ($cards.length <= 1) {
+        $dotsContainer.hide();
+        return;
+      }
+
+      // Generate dots
+      $dotsContainer.empty();
+      $cards.each(function (idx) {
+        var $dot = $('<button class="za-m-dot" type="button" aria-label="Go to item ' + (idx + 1) + '"></button>');
+        if (idx === 0) {
+          $dot.addClass('is-active');
+        }
+        $dot.data('index', idx);
+        $dotsContainer.append($dot);
+      });
+
+      var $dots = $dotsContainer.find('.za-m-dot');
+
+      // Click dot to scroll smoothly to card
+      $dots.on('click', function () {
+        var idx = $(this).data('index');
+        var targetCard = $cards.get(idx);
+        if (targetCard) {
+          var containerWidth = $container.width();
+          var cardLeft = targetCard.offsetLeft;
+          var cardWidth = $(targetCard).outerWidth();
+          var scrollTo = cardLeft - (containerWidth / 2) + (cardWidth / 2);
+          $container.stop().animate({ scrollLeft: scrollTo }, 300);
+        }
+      });
+
+      // Update active dot on scroll
+      var ticking = false;
+      $container.on('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            var containerCenter = $container.scrollLeft() + ($container.width() / 2);
+            var closestIdx = 0;
+            var minDiff = Infinity;
+
+            $cards.each(function (idx) {
+              var cardCenter = this.offsetLeft + ($(this).outerWidth() / 2);
+              var diff = Math.abs(containerCenter - cardCenter);
+              if (diff < minDiff) {
+                minDiff = diff;
+                closestIdx = idx;
+              }
+            });
+
+            $dots.removeClass('is-active').eq(closestIdx).addClass('is-active');
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+
+    initMobileSnapSlider('#za-cat-grid', '#za-cat-slider-dots', '.za-cat-card');
+    initMobileSnapSlider('#za-prod-grid', '#za-prod-slider-dots', '.za-product-card');
   });
 })(jQuery);
 

@@ -156,13 +156,15 @@ $categories_grid = [
                 <div class="za-heading-bar"></div>
             </div>
 
-            <div class="za-category-grid">
+            <div class="za-category-grid" id="za-cat-grid">
                 <?php foreach ($categories_grid as $cat) : ?>
                     <a href="<?php echo esc_url($cat['url']); ?>" class="za-cat-card" aria-label="<?php echo esc_attr($cat['title']); ?>">
                         <img src="<?php echo esc_url($cat['image']); ?>" alt="<?php echo esc_attr($cat['title']); ?>" class="za-cat-img" loading="lazy">
                     </a>
                 <?php endforeach; ?>
             </div>
+            <!-- Mobile Slider Indicator Dots -->
+            <div class="za-mobile-slider-dots" id="za-cat-slider-dots" aria-hidden="true"></div>
         </div>
     </section>
 
@@ -220,7 +222,7 @@ $categories_grid = [
                 <div class="za-heading-bar"></div>
             </div>
 
-            <div class="za-products-grid">
+            <div class="za-products-grid" id="za-prod-grid">
                 <?php
                 if (class_exists('WooCommerce')) {
                     $args = [
@@ -284,6 +286,17 @@ $categories_grid = [
                 }
                 ?>
             </div>
+
+            <!-- Mobile Slider Indicator Dots -->
+            <div class="za-mobile-slider-dots" id="za-prod-slider-dots" aria-hidden="true"></div>
+
+            <!-- View All Products CTA -->
+            <div class="za-products-cta-wrap">
+                <a href="<?php echo esc_url(wc_get_page_permalink('shop') ?: home_url('/shop/')); ?>" class="za-btn za-btn-primary za-btn-view-all">
+                    <span>View All Products</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -299,11 +312,11 @@ $categories_grid = [
                 </p>
                 <div class="za-b2b-actions">
                     <button type="button" class="za-btn za-btn-gold za-open-quote-modal">
-                        <span>Get Instant Wholesale Quote</span>
+                        <span>Get Wholesale Quote</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </button>
                     <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="za-btn za-btn-outline-light">
-                        <span>Contact Factory Support</span>
+                        <span>Contact Factory</span>
                     </a>
                 </div>
             </div>

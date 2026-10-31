@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ZYNOVA_THEME_VERSION', '1.1.6');
+define('ZYNOVA_THEME_VERSION', '1.1.7');
 define('ZYNOVA_THEME_DIR', get_template_directory());
 define('ZYNOVA_THEME_URI', get_template_directory_uri());
 
@@ -208,14 +208,21 @@ function zynova_scripts() {
             display: none;
             align-items: center !important;
             justify-content: center !important;
-            width: 40px !important;
-            height: 40px !important;
-            background: rgba(255, 255, 255, 0.06) !important;
-            border: 1px solid rgba(255, 255, 255, 0.16) !important;
-            border-radius: 6px !important;
+            width: 42px !important;
+            height: 42px !important;
+            background: rgba(200, 155, 60, 0.12) !important;
+            border: 1.5px solid rgba(200, 155, 60, 0.45) !important;
+            border-radius: 8px !important;
+            color: var(--za-accent-gold) !important;
             padding: 0 !important;
             box-sizing: border-box !important;
             flex-shrink: 0 !important;
+            transition: all 0.2s ease !important;
+        }
+        .za-mobile-menu-trigger[aria-expanded='true'] {
+            background: var(--za-accent-gold) !important;
+            border-color: var(--za-accent-gold) !important;
+            color: var(--za-primary-dark) !important;
         }
         @media (max-width: 1260px) {
             .za-nav-link { padding: 0 8px !important; font-size: 0.84rem !important; }
@@ -237,7 +244,7 @@ function zynova_scripts() {
             .za-btn-quote { height: 36px !important; padding: 0 12px !important; font-size: 0.8rem !important; gap: 6px !important; }
             .za-btn-quote-text { display: none !important; }
             .za-btn-quote-short { display: inline !important; }
-            .za-mobile-menu-trigger { width: 36px !important; height: 36px !important; }
+            .za-mobile-menu-trigger { width: 38px !important; height: 38px !important; }
         }
         @media (max-width: 420px) {
             .za-header-container { padding: 0 10px !important; }
