@@ -46,20 +46,6 @@ if (!defined('ABSPATH')) {
 
             <!-- Header Actions -->
             <div class="za-header-actions">
-                <?php if (class_exists('WooCommerce')) : ?>
-                    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="za-header-cart-btn" title="<?php esc_attr_e('View Cart', 'zynova'); ?>">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <path d="M16 10a4 4 0 0 1-8 0"></path>
-                        </svg>
-                        <?php 
-                        $cart_count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
-                        if ($cart_count > 0) : ?>
-                            <span class="za-cart-badge"><?php echo esc_html($cart_count); ?></span>
-                        <?php endif; ?>
-                    </a>
-                <?php endif; ?>
 
                 <button type="button" class="za-btn za-btn-quote za-open-quote-modal" aria-label="<?php esc_attr_e('Request a Quote', 'zynova'); ?>">
                     <span class="za-btn-quote-text"><?php esc_html_e('Request a Quote', 'zynova'); ?></span>
