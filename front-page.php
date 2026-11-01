@@ -19,6 +19,9 @@ $theme_uri = get_template_directory_uri();
 
 // Helper to get category link
 $get_cat_url = function($slug) {
+    if ($slug === 'motorcycle-racing-gear') {
+        $slug = 'motorcycling';
+    }
     $term = get_term_by('slug', $slug, 'product_cat');
     if ($term && !is_wp_error($term)) {
         return get_term_link($term);
@@ -30,7 +33,7 @@ $get_cat_url = function($slug) {
 $slider_slides = [
     [
         'title'   => 'Motorcycle & Racing Gear',
-        'url'     => $get_cat_url('motorcycle-racing-gear'),
+        'url'     => $get_cat_url('motorcycling'),
         'image'   => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear.jpg',
         'webp'    => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear.webp',
         'webp_2x' => $theme_uri . '/assets/images/sliders/motorcycle-racing-gear-2x.webp',
@@ -88,7 +91,7 @@ $slider_slides = [
 $categories_grid = [
     [
         'title' => 'Motorcycle & Racing Gear',
-        'url'   => $get_cat_url('motorcycle-racing-gear'),
+        'url'   => $get_cat_url('motorcycling'),
         'image' => $theme_uri . '/assets/images/categories/motorcycle-racing-gear.jpg',
     ],
     [
@@ -279,7 +282,7 @@ $categories_grid = [
                     } else {
                         // Fallback showcase items matching product lines
                         $showcase = [
-                            ['title' => 'RACING JACKET PRO', 'img' => $theme_uri . '/assets/images/categories/motorcycle-racing-gear.jpg', 'cat' => 'Motorcycle Gear', 'url' => $get_cat_url('motorcycle-racing-gear')],
+                            ['title' => 'RACING JACKET PRO', 'img' => $theme_uri . '/assets/images/categories/motorcycle-racing-gear.jpg', 'cat' => 'Motorcycle Gear', 'url' => $get_cat_url('motorcycling')],
                             ['title' => 'PERFORMANCE HOODIE', 'img' => $theme_uri . '/assets/images/categories/sportswear.jpg', 'cat' => 'Sportswear', 'url' => $get_cat_url('sportswear')],
                             ['title' => 'URBAN LEATHER JACKET', 'img' => $theme_uri . '/assets/images/categories/fashion-wear.jpg', 'cat' => 'Fashion Wear', 'url' => $get_cat_url('fashion-wear')],
                             ['title' => 'SAFETY COVERALL PRO', 'img' => $theme_uri . '/assets/images/categories/workwear-safety.jpg', 'cat' => 'Workwear & Safety', 'url' => $get_cat_url('workwear-safety-gear')],

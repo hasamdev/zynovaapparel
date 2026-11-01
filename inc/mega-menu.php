@@ -20,6 +20,9 @@ function zynova_get_navigation_tree() {
     }
 
     $helper_link = function($slug) {
+        if ($slug === 'motorcycle-racing-gear') {
+            $slug = 'motorcycling';
+        }
         $term = get_term_by('slug', $slug, 'product_cat');
         if ($term && !is_wp_error($term)) {
             return get_term_link($term);
@@ -119,7 +122,7 @@ function zynova_get_navigation_tree() {
         ],
         'motorcycling' => [
             'title' => 'Motorcycling',
-            'url'   => $helper_link('motorcycle-racing-gear'),
+            'url'   => $helper_link('motorcycling'),
             'type'  => 'mega',
             'full_columns' => 6, // 6 columns strictly as designed in navbar snapshot
             'columns' => [

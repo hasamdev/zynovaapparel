@@ -65,10 +65,7 @@ function zynova_theme_setup() {
         'footer-company'    => esc_html__('Footer Company Links', 'zynova'),
     ]);
 
-    // Purge LiteSpeed cache on theme update
-    if (has_action('litespeed_purge_all')) {
-        do_action('litespeed_purge_all');
-    }
+
 }
 add_action('after_setup_theme', 'zynova_theme_setup');
 
@@ -1382,12 +1379,12 @@ remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wra
 remove_action('woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 
 function zynova_woocommerce_wrapper_before() {
-    echo '<main id="primary" class="site-main za-shop-container"><div class="za-container">';
+    echo '<div class="za-wc-content-inner">';
 }
 add_action('woocommerce_before_main_content', 'zynova_woocommerce_wrapper_before', 10);
 
 function zynova_woocommerce_wrapper_after() {
-    echo '</div></main>';
+    echo '</div>';
 }
 add_action('woocommerce_after_main_content', 'zynova_woocommerce_wrapper_after', 10);
 

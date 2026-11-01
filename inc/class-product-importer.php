@@ -40,6 +40,18 @@ class Zynova_Product_Importer {
             'callback'            => [__CLASS__, 'handle_update_theme_file'],
             'permission_callback' => [__CLASS__, 'check_permissions'],
         ]);
+
+        register_rest_route('zynova/v1', '/debug-category', [
+            'methods'             => 'GET',
+            'callback'            => [__CLASS__, 'handle_debug_category'],
+            'permission_callback' => [__CLASS__, 'check_permissions'],
+        ]);
+
+        register_rest_route('zynova/v1', '/test-product', [
+            'methods'             => 'GET',
+            'callback'            => [__CLASS__, 'handle_test_product'],
+            'permission_callback' => [__CLASS__, 'check_permissions'],
+        ]);
     }
 
     public static function check_permissions($request) {
@@ -94,6 +106,101 @@ class Zynova_Product_Importer {
             'path'    => $rel_path,
             'bytes'   => file_exists($full_path) ? filesize($full_path) : 0,
         ]);
+    }
+
+    public static function handle_debug_category($request) {
+        $slug = sanitize_text_field($request->get_param('slug') ?: 'fashion-wear');
+        $log = [];
+        
+        // List all product categories in DB
+        $all_cats = get_terms([
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => false,
+        ]);
+        $log['all_categories'] = [];
+        if (!empty($all_cats) && !is_wp_error($all_cats)) {
+            foreach ($all_cats as $cat) {
+                $log['all_categories'][] = [
+                    'term_id' => $cat->term_id,
+                    'name'    => $cat->name,
+                    'slug'    => $cat->slug,
+                    'parent'  => $cat->parent,
+                    'count'   => $cat->count,
+                ];
+            }
+        }
+
+        $term = get_term_by('slug', $slug, 'product_cat');
+        $log['term'] = $term ? ['id' => $term->term_id, 'name' => $term->name, 'count' => $term->count] : null;
+
+        $args = [
+            'post_type'      => 'product',
+            'posts_per_page' => 20,
+            'tax_query'      => [
+                [
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'slug',
+                    'terms'    => $slug,
+                ],
+            ],
+        ];
+        $query = new WP_Query($args);
+        $log['found_posts'] = $query->found_posts;
+        $log['post_ids'] = wp_list_pluck($query->posts, 'ID');
+        
+        $log['products'] = [];
+        foreach ($query->posts as $p) {
+            $prod = wc_get_product($p->ID);
+            $log['products'][] = [
+                'id' => $p->ID,
+                'title' => $p->post_title,
+                'type' => $prod ? $prod->get_type() : null,
+                'price' => $prod ? $prod->get_price_html() : null,
+            ];
+        }
+
+        return rest_ensure_response([
+            'success' => true,
+            'slug'    => $slug,
+            'log'     => $log,
+        ]);
+    }
+
+    public static function handle_test_product($request) {
+        $id = intval($request->get_param('id') ?: 830);
+        $post = get_post($id);
+        if (!$post) {
+            return new WP_Error('not_found', 'Product not found', ['status' => 404]);
+        }
+        
+        $log = ['id' => $id, 'title' => $post->post_title];
+        
+        $prod = wc_get_product($id);
+        $log['type'] = $prod ? $prod->get_type() : null;
+        
+        if ($prod && $prod->is_type('variable')) {
+            $log['children'] = $prod->get_children();
+            $log['visible_children'] = $prod->get_visible_children();
+            $log['variation_attributes'] = $prod->get_variation_attributes();
+        }
+        
+        global $product, $post;
+        $product = $prod;
+        setup_postdata($post);
+        
+        ob_start();
+        try {
+            wc_get_template_part('content', 'product');
+            $html = ob_get_clean();
+            $log['render_success'] = true;
+            $log['html_len'] = strlen($html);
+        } catch (\Throwable $e) {
+            ob_end_clean();
+            $log['render_success'] = false;
+            $log['error'] = $e->getMessage();
+        }
+        
+        return rest_ensure_response(['success' => true, 'log' => $log]);
     }
 
     public static function handle_import_item($request) {

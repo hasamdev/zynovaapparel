@@ -144,30 +144,31 @@ get_header();
                             ]);
                         }
 
-                        if ($top_query->have_posts()) :
-                            while ($top_query->have_posts()) :
-                                $top_query->the_post();
-                                global $product;
+                        if (!empty($top_query->posts)) :
+                            foreach ($top_query->posts as $tp) :
+                                $t_prod  = wc_get_product($tp->ID);
+                                $t_title = get_the_title($tp->ID);
+                                $t_link  = get_permalink($tp->ID);
                                 ?>
                                 <li class="za-top-product-card">
-                                    <a href="<?php the_permalink(); ?>" class="za-top-product-img-link" aria-label="<?php the_title_attribute(); ?>">
-                                        <?php if (has_post_thumbnail()) : ?>
-                                            <?php the_post_thumbnail('woocommerce_thumbnail'); ?>
+                                    <a href="<?php echo esc_url($t_link); ?>" class="za-top-product-img-link" aria-label="<?php echo esc_attr($t_title); ?>">
+                                        <?php if (has_post_thumbnail($tp->ID)) : ?>
+                                            <?php echo get_the_post_thumbnail($tp->ID, 'woocommerce_thumbnail'); ?>
                                         <?php else : ?>
-                                            <img src="<?php echo esc_url(home_url('/wp-content/uploads/woocommerce-placeholder.webp')); ?>" alt="<?php the_title_attribute(); ?>">
+                                            <img src="<?php echo esc_url(home_url('/wp-content/uploads/woocommerce-placeholder.webp')); ?>" alt="<?php echo esc_attr($t_title); ?>">
                                         <?php endif; ?>
                                     </a>
                                     <div class="za-top-product-details">
-                                        <a href="<?php the_permalink(); ?>" class="za-top-product-title">
-                                            <?php the_title(); ?>
+                                        <a href="<?php echo esc_url($t_link); ?>" class="za-top-product-title">
+                                            <?php echo esc_html($t_title); ?>
                                         </a>
                                         <div class="za-top-product-stars" aria-label="5 out of 5 stars">
                                             <span class="za-star">★</span><span class="za-star">★</span><span class="za-star">★</span><span class="za-star">★</span><span class="za-star">★</span>
                                         </div>
                                         <div class="za-top-product-price">
                                             <?php 
-                                            if ($product && $product->get_price_html()) {
-                                                echo $product->get_price_html();
+                                            if ($t_prod && $t_prod->get_price_html()) {
+                                                echo $t_prod->get_price_html();
                                             } else {
                                                 echo '<span class="za-price-request">Price on Request</span>';
                                             }
@@ -176,8 +177,7 @@ get_header();
                                     </div>
                                 </li>
                                 <?php
-                            endwhile;
-                            wp_reset_postdata();
+                            endforeach;
                         endif;
                         ?>
                     </ul>
