@@ -2731,6 +2731,13 @@ flex-shrink: 0;
   .za-products-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  body .za-shop-layout {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: column-reverse !important;
+  }
+
 }
 
 @media (max-width: 992px) {
@@ -3848,12 +3855,6 @@ body.za-lightbox-locked {
   .za-single-product-grid {
     grid-template-columns: 460px 1fr;
     gap: 36px;
-  }
-
-  body .za-shop-layout {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    flex-direction: column-reverse !important;
   }
 }
 
