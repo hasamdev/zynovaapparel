@@ -3068,40 +3068,40 @@ flex-shrink: 0;
     gap: 24px !important;
   }
 
-  .woocommerce ul.products,
-  .woocommerce-page ul.products,
-  .za-shop-main .za-woocommerce-content ul.products,
-  .za-woocommerce-content ul.products,
-  .related.products ul.products,
-  .upsells.products ul.products {
+  body .woocommerce ul.products,
+  body .woocommerce-page ul.products,
+  body .za-shop-main .za-woocommerce-content ul.products,
+  body .za-woocommerce-content ul.products,
+  body .related.products ul.products,
+  body .upsells.products ul.products {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 12px !important;
   }
 
-  .woocommerce ul.products li.product,
-  .woocommerce-page ul.products li.product,
-  .za-woocommerce-content ul.products li.product {
+  body .woocommerce ul.products li.product,
+  body .woocommerce-page ul.products li.product,
+  body .za-woocommerce-content ul.products li.product {
     padding: 10px !important;
   }
 
-  .woocommerce ul.products li.product a img,
-  .woocommerce-page ul.products li.product a img,
-  .za-woocommerce-content ul.products li.product a img {
+  body .woocommerce ul.products li.product a img,
+  body .woocommerce-page ul.products li.product a img,
+  body .za-woocommerce-content ul.products li.product a img {
     height: 150px !important;
     padding: 8px !important;
     margin-bottom: 8px !important;
   }
 
-  .woocommerce ul.products li.product .woocommerce-loop-product__title,
-  .woocommerce-page ul.products li.product .woocommerce-loop-product__title,
-  .za-woocommerce-content ul.products li.product .woocommerce-loop-product__title {
+  body .woocommerce ul.products li.product .woocommerce-loop-product__title,
+  body .woocommerce-page ul.products li.product .woocommerce-loop-product__title,
+  body .za-woocommerce-content ul.products li.product .woocommerce-loop-product__title {
     font-size: 0.82rem !important;
     min-height: 2.6em !important;
   }
 
-  .woocommerce ul.products li.product .button,
-  .woocommerce-page ul.products li.product .button,
-  .za-woocommerce-content ul.products li.product .button {
+  body .woocommerce ul.products li.product .button,
+  body .woocommerce-page ul.products li.product .button,
+  body .za-woocommerce-content ul.products li.product .button {
     height: 36px !important;
     font-size: 0.74rem !important;
     padding: 0 8px !important;
@@ -3885,17 +3885,6 @@ body.za-lightbox-locked {
   .za-main-img-box {
     height: 380px;
   }
-
-  .woocommerce ul.products, 
-  .woocommerce-page ul.products, 
-  .za-shop-main .za-woocommerce-content ul.products, 
-  .za-woocommerce-content ul.products, 
-  .related.products ul.products, 
-  .upsells.products ul.products {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-  }
-
 }
 
 @media (max-width: 600px) {
