@@ -3850,10 +3850,10 @@ body.za-lightbox-locked {
     gap: 36px;
   }
 
-  .za-shop-layout {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column-reverse;
+  body .za-shop-layout {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: column-reverse !important;
   }
 }
 
