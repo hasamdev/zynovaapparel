@@ -3849,6 +3849,12 @@ body.za-lightbox-locked {
     grid-template-columns: 460px 1fr;
     gap: 36px;
   }
+
+  .za-shop-layout {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
 }
 
 @media (max-width: 991px) {
@@ -3879,6 +3885,17 @@ body.za-lightbox-locked {
   .za-main-img-box {
     height: 380px;
   }
+
+  .woocommerce ul.products, 
+  .woocommerce-page ul.products, 
+  .za-shop-main .za-woocommerce-content ul.products, 
+  .za-woocommerce-content ul.products, 
+  .related.products ul.products, 
+  .upsells.products ul.products {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
 }
 
 @media (max-width: 600px) {
