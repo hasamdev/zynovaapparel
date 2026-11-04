@@ -70,9 +70,27 @@ function zynova_theme_setup() {
 add_action('after_setup_theme', 'zynova_theme_setup');
 
 /**
+ * Get a cache-busting version for a local theme asset.
+ */
+function zynova_asset_version($file_path) {
+    if (is_file($file_path)) {
+        $modified_time = filemtime($file_path);
+        if (false !== $modified_time) {
+            return (string) $modified_time;
+        }
+    }
+
+    return ZYNOVA_THEME_VERSION;
+}
+
+/**
  * Enqueue scripts and styles.
  */
 function zynova_scripts() {
+    $stylesheet_path = get_stylesheet_directory() . '/style.css';
+    $main_css_path   = ZYNOVA_THEME_DIR . '/assets/css/main.css';
+    $main_js_path    = ZYNOVA_THEME_DIR . '/assets/js/main.js';
+
     // Google Fonts: Outfit & Inter
     wp_enqueue_style(
         'zynova-google-fonts',
@@ -86,7 +104,7 @@ function zynova_scripts() {
         'zynova-style',
         get_stylesheet_uri(),
         [],
-        ZYNOVA_THEME_VERSION
+        zynova_asset_version($stylesheet_path)
     );
 
     // Theme Custom Component Styles
@@ -94,7 +112,7 @@ function zynova_scripts() {
         'zynova-main-css',
         ZYNOVA_THEME_URI . '/assets/css/main.css',
         ['zynova-style'],
-        ZYNOVA_THEME_VERSION
+        zynova_asset_version($main_css_path)
     );
 
     // Injected critical CSS overrides to guarantee immediate cache-free rendering
@@ -1355,7 +1373,7 @@ function zynova_scripts() {
         'zynova-main-js',
         ZYNOVA_THEME_URI . '/assets/js/main.js',
         ['jquery'],
-        ZYNOVA_THEME_VERSION,
+        zynova_asset_version($main_js_path),
         true
     );
 
@@ -1434,5 +1452,4 @@ function zynova_breadcrumbs() {
  * Product Importer REST API
  */
 require_once ZYNOVA_THEME_DIR . '/inc/class-product-importer.php';
-
 
